@@ -33,6 +33,7 @@ void getInputData(double &S0, double &U, double &D, double &R) {
     }
 }
 
+// Binomial coefficient
 double NewtonSymb(int N, int i) {
     if (i<0 || i>N) return 0;
     double result = 1;
