@@ -22,9 +22,9 @@ double PriceByCRR(double S0, double U, double D, double R, int N, double K, doub
     for (int i = 0 ; i <= N; i++) { // payoff
         *(Price+i) = Payoff( S(S0,U,D,N,i), K);
     }
-    for ( int n = N - 1 ; n >= 0 ; n-- ) { // fill backwards
-        for (int i = 0; i <= n; i++) {
-            *(Price+i) = ( q * (*(Price+i+1)) + (1 - q) * (*(Price+i)) ) / (1+R);
+    for ( int n = N - 1 ; n >= 0 ; n-- ) { // fill backwards by expectation
+        for (int i = 0; i <= n; i++) { // requires double for loop to build entire tree
+            *(Price+i) = ( q * (*(Price+i+1)) + (1 - q) * (*(Price+i)) ) / pow(1.+R,N);
         }
     }
     return *Price;
@@ -53,7 +53,7 @@ double PriceAnalytic(double S0, double U, double D, double R, int N, double K, d
     }
     for (int i=0; i<=N; i++)
     {
-        PDF[i] = NewtonSymb(N, i) * pow(q, i) * pow(1 - q, N - i);
+        PDF[i] = NewtonSymb(N, i) * pow(q, i) * pow(1 - q, N - i); // binomial distribution
         PDF_Sum += PDF[i];
         //std::cout << "i =" << i << " , PDF[i] = " << PDF[i] << std::endl;
         Sum += PDF[i] * Price[i];
@@ -61,7 +61,7 @@ double PriceAnalytic(double S0, double U, double D, double R, int N, double K, d
     }
     file.close();
     //std::cout << " PDF_Sum = " << PDF_Sum << std::endl ;
-    double result = Sum / pow(1.+R,N);
+    double result = Sum / pow(1.+R,N); // expectation of discouted payoff
     delete [] Price;
     delete [] S_T;
     return result;
