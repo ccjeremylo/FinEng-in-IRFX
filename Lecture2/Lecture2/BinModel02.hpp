@@ -11,6 +11,7 @@
 #include <iostream>
 #include <cmath>
 #include <math.h>
+#include <limits>
 
 class BinModel {
 public:
@@ -24,5 +25,6 @@ private:
     double U_;
     double D_;
     double R_;
+    double T_;
     
 };

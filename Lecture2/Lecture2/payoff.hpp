@@ -5,9 +5,16 @@
 //  Created by Jeremy Lo on 17/10/2023.
 //
 
-#ifndef payoff_hpp
-#define payoff_hpp
+#pragma once
 
 #include <stdio.h>
+#include <iostream>
+#include <cmath>
+#include <math.h>
 
-#endif /* payoff_hpp */
+//computing payoff
+double CallPayoff(double z, double K);
+
+double PutPayoff(double z, double K);
+
+double DoubleBarrierPayoff(double z, double K);
