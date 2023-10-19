@@ -24,7 +24,7 @@ double lecture1::PriceByCRR(double S0, double U, double D, double R, int N, doub
     }
     for ( int n = N - 1 ; n >= 0 ; n-- ) { // fill backwards by expectation
         for (int i = 0; i <= n; i++) { // requires double for loop to build entire tree
-            *(Price+i) = ( q * (*(Price+i+1)) + (1 - q) * (*(Price+i)) ) / pow(1.+R,N);
+            *(Price+i) = ( q * (*(Price+i+1)) + (1 - q) * (*(Price+i)) ) / (1.+R);
         }
     }
     return *Price;

@@ -9,13 +9,12 @@
 #include "BlackScholes.hpp"
 
 
-// Standard normal probability density function
+// Standard normal pdf
 double norm_pdf(const double& x) {
     return (1.0/(pow(2*M_PI,0.5)))*exp(-0.5*x*x);
 }
 
-// An approximation to the cumulative distribution function
-// for the standard normal distribution
+// An approximation to the CDF of a standard normal
 // Note: This is a recursive function
 double lecture1::norm_cdf(const double& x) {
     double k = 1.0/(1.0 + 0.2316419*x);
@@ -28,22 +27,17 @@ double lecture1::norm_cdf(const double& x) {
     }
 }
 
-// This calculates d_j, for j in {1,2}. This term appears in the closed
-// form solution for the European call or put price
+// This calculates d_j, for j in {1,2}
 double lecture1::d_j(const int& j, const double& S, const double& K, const double& r, const double& v, const double& T) {
     return (log(S/K) + (r + (pow(-1,j-1))*0.5*v*v)*T)/(v*(pow(T,0.5)));
 }
 
-// Calculate the European vanilla call price based on
-// underlying S, strike K, risk-free rate r, volatility of
-// underlying sigma and time to maturity T
+// Calculate the European vanilla call price
 double lecture1::call_price(const double& S, const double& K, const double& r, const double& v, const double& T) {
     return S * lecture1::norm_cdf(lecture1::d_j(1, S, K, r, v, T))-K*exp(-r*T) * lecture1::norm_cdf(d_j(2, S, K, r, v, T));
 }
 
-// Calculate the European vanilla put price based on
-// underlying S, strike K, risk-free rate r, volatility of
-// underlying sigma and time to maturity T
+// Calculate the European vanilla put price
 double lecture1::put_price(const double& S, const double& K, const double& r, const double& v, const double& T) {
     return -S*lecture1::norm_cdf(-lecture1::d_j(1, S, K, r, v, T))+K*exp(-r*T) * lecture1::norm_cdf(-d_j(2, S, K, r, v, T));
 }
