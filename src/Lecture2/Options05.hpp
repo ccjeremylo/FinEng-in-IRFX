@@ -17,6 +17,8 @@
 
 namespace lecture2 {
 
+// don't like this design, options should have no knowledge about the model
+// and definately should not know current level of S and r
 class EurOption
 {
 public:

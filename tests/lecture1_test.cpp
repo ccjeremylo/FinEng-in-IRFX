@@ -52,19 +52,6 @@ TEST(L1, vanillaPutPayOffs)
     EXPECT_EQ(lecture1::PutPayoff(100.2, 100.2), 0.0) << "Vanilla put ATM case failed!";
 }
 
-TEST(L1, analyticBinomialPricer)
-{
-    double S0 = 10.0;
-
-    double R = 0.02;
-    double U = 0.1;
-    double D = -0.1;
-
-    int N = 10000.0;
-    double K = 10.0;
-    double price = lecture1::PriceAnalytic(S0, U, D, R, N, K, lecture1::PutPayoff);
-}
-
 TEST(L1, CRRBinomialTest)
 {
     double S0 = 110.0;
@@ -87,12 +74,12 @@ TEST(L1, CRRBinomialTest)
     // Call
     double priceCRR_call = lecture1::PriceByCRR(S0, U, D, R, N, K, lecture1::CallPayoff);
     double price_call = lecture1::PriceAnalytic(S0, U, D, R, N, K, lecture1::CallPayoff);
-    EXPECT_TRUE(std::abs(priceCRR_call -price_call) < epsilon) << "ds";
+    EXPECT_TRUE(std::abs(priceCRR_call -price_call) < epsilon);
     
     // Put
     double priceCRR_put = lecture1::PriceByCRR(S0, U, D, R, N, K, lecture1::PutPayoff);
     double price_put = lecture1::PriceAnalytic(S0, U, D, R, N, K, lecture1::PutPayoff);
-    EXPECT_TRUE(std::abs(priceCRR_put -price_put) < epsilon) << "ds";
+    EXPECT_TRUE(std::abs(priceCRR_put -price_put) < epsilon);
     
 }
 
