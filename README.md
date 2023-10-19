@@ -17,10 +17,11 @@
 ## Features
 * Python interface of c++ code using pybind (to be added)
 * Gtest
+* auto formatting
 
 ## Requirements
-* CMake (version >= 3.18).
-* C++11 compliant compiler.
+* CMake 
+* C++11 compliant compiler
 
 ## Install, Build, and Run
 Build:
@@ -54,6 +55,5 @@ Binomial tree option pricing continued:
 ### Lecture 3
 Monte Carlo pricing:
 * pricing american and path-dependent options
-
 
 
