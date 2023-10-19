@@ -20,10 +20,11 @@ Following structure of [this course](https://www.city.ac.uk/prospective-students
 * C++17 compliant compiler.
 
 ## Install
-Build:
+Build (generate executable ``````):
 ```
-cmake ...tbd
-cmake --build
+cd ./build
+cmake ..
+make
 ```
 Run tests:
 ```
