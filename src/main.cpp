@@ -1,18 +1,19 @@
 //
 //  main.cpp
-//  Lecture1
 //
-//  Created by Jeremy Lo on 08/10/2023.
+//  Created by Jeremy Lo on 19/10/2023.
 //
+
+#include <iostream>
 
 #include <stdio.h>
 #include <math.h>
 #include <iostream>
 #include <fstream>
 
-#include "BinModel01.hpp"
-#include "Options01.hpp"
-#include "BlackScholes.hpp"
+#include "Lecture1/BinModel01.hpp"
+#include "Lecture1/Options01.hpp"
+#include "Lecture1/BlackScholes.hpp"
 
 
 int main(){
@@ -33,40 +34,31 @@ int main(){
     double U = exp(v * h + sigma * pow(h, 0.5)) -1;
     double D = exp(v * h - sigma * pow(h, 0.5)) -1;
     double R = exp(r * h) -1;
-    //getInputData(S0, U, D, R);
     
-    
-    //getOptionsInputData(N, K);
-    
-    std::cout << "Risk neutral (up) prob q = " << riskNeutralProb(U,D,R) << std::endl;
+    std::cout << "Risk neutral (up) prob q = " << lecture1::riskNeutralProb(U,D,R) << std::endl;
     std::cout << "Moneyness (S/K) = " << S0/K << std::endl;
     
     std::cout << std::endl;
     
     // Call
-    double priceCRR_call = PriceByCRR(S0, U, D, R, N, K, CallPayoff);
+    double priceCRR_call = lecture1::PriceByCRR(S0, U, D, R, N, K, lecture1::CallPayoff);
     std::cout << "Call option price by CRR     = " << priceCRR_call << std::endl;
-    double price_call = PriceAnalytic(S0, U, D, R, N, K, CallPayoff, "pdf_call");
+    double price_call = lecture1::PriceAnalytic(S0, U, D, R, N, K, lecture1::CallPayoff);
     std::cout << "Call option price (analytic) = " << price_call << std::endl;
-    double price_bs_call = call_price(S0, K, r, sigma, T);
+    double price_bs_call = lecture1::call_price(S0, K, r, sigma, T);
     std::cout << "Call option price (BS) = " << price_bs_call << std::endl;
     std::cout << std::endl;
     
     // Put
-    double priceCRR_put = PriceByCRR(S0, U, D, R, N, K, PutPayoff);
+    double priceCRR_put = lecture1::PriceByCRR(S0, U, D, R, N, K, lecture1::PutPayoff);
     std::cout << "Put option price by CRR     = " << priceCRR_put << std::endl;
-    double price_put = PriceAnalytic(S0, U, D, R, N, K, PutPayoff, "pdf_put");
+    double price_put = lecture1::PriceAnalytic(S0, U, D, R, N, K, lecture1::PutPayoff);
     std::cout << "Put option price (analytic) = " << price_put << std::endl;
-    double price_bs_put = put_price(S0, K, r, sigma, T);
+    double price_bs_put = lecture1::put_price(S0, K, r, sigma, T);
     std::cout << "Put option price (BS) = " << price_bs_put << std::endl;
     std::cout << std::endl;
     
-    std::ofstream myfile;
-    myfile.open("example.txt");
-    myfile << "test output!" << std::endl;
-    myfile.close();
-    
-    std::cout << "Done!" << std::endl;
+    std::cout << "Done!" << std::endl; 
     
     return 0;
 }

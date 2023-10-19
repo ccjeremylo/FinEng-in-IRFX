@@ -8,7 +8,7 @@
 #include "BinModel01.hpp"
 
 
-void getInputData(double &S0, double &U, double &D, double &R) {
+void lecture1::getInputData(double &S0, double &U, double &D, double &R) {
     std::cout << "Enter S0: ";
     std::cin >> S0;
     
@@ -34,7 +34,7 @@ void getInputData(double &S0, double &U, double &D, double &R) {
 }
 
 // Binomial coefficient
-double NewtonSymb(int N, int i) {
+double lecture1::NewtonSymb(int N, int i) {
     if (i<0 || i>N) return 0;
     double result = 1;
     for (int k=1; k<=i; k++) {
@@ -43,11 +43,11 @@ double NewtonSymb(int N, int i) {
     return result;
 }
 
-double riskNeutralProb(const double &U, const double &D, const double &R) {
+double lecture1::riskNeutralProb(const double &U, const double &D, const double &R) {
     return (R-D) / (U-D);
 }
 
-double S(const double& S0, const double& U, const double& D, const int& N, const int& i) {
+double lecture1::S(const double& S0, const double& U, const double& D, const int& N, const int& i) {
     return S0 * std::pow(1+U, i) * std::pow(1+D, N-i);
 }
 
