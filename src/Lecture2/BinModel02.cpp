@@ -7,19 +7,19 @@
 
 #include "BinModel02.hpp"
 
-double BinModel::RiskNeutralProb() {
+double lecture2::BinModel::RiskNeutralProb() {
     return (R_ - D_) / (U_ - D_);
 }
 
-double BinModel::S(int n, int i) {
+double lecture2::BinModel::S(int n, int i) {
     return S0_ * pow(1+U_,i) * pow(1+D_, n-i);
 }
 
-double BinModel::GetR() {
+double lecture2::BinModel::GetR() {
     return R_;
 }
 
-BinModel::BinModel(double S0, double U, double D, double R) : S0_{S0}, U_{U}, D_{D}, R_{R} {
+lecture2::BinModel::BinModel(double S0, double U, double D, double R) : S0_(S0), U_(U), D_(D), R_(R) {
     if (S0_ <= 0 || U_ <= -1.0 || D_ <= -1.0 || R_ <= -1.0 || U_ <= D)
     {
         throw std::invalid_argument( "Illegal data range!" );

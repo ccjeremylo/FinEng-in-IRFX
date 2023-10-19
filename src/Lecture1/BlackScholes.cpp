@@ -8,10 +8,11 @@
 
 #include "BlackScholes.hpp"
 
-
+namespace {
 // Standard normal pdf
 double norm_pdf(const double& x) {
     return (1.0/(pow(2*M_PI,0.5)))*exp(-0.5*x*x);
+}
 }
 
 // An approximation to the CDF of a standard normal

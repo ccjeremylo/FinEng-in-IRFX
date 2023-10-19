@@ -9,7 +9,7 @@
 #include <vector>
 
 
-void getOptionsInputData(int& N, double& K) {
+void lecture2::getOptionsInputData(int& N, double& K) {
     std::cout << "Enter steps to expiry N: ";
     std::cin >> N;
     
@@ -18,7 +18,7 @@ void getOptionsInputData(int& N, double& K) {
     std::cout << std::endl;
 }
 
-double PriceByCRR(BinModel Model, int N, double K, double (*Payoff)(double z, double K)) {
+double lecture2::PriceByCRR(lecture2::BinModel Model, int N, double K, double (*Payoff)(double z, double K)) {
     double q = Model.RiskNeutralProb();
     double Price[N+1];
     for (int i = 0 ; i <= N; i++) { // payoff
@@ -33,7 +33,7 @@ double PriceByCRR(BinModel Model, int N, double K, double (*Payoff)(double z, do
  }
 
 // Binomial coefficient
-double NewtonSymb(int N, int i) {
+double lecture2::NewtonSymb(int N, int i) {
     if (i<0 || i>N) return 0;
     double result = 1;
     for (int k=1; k<=i; k++) {
@@ -42,7 +42,7 @@ double NewtonSymb(int N, int i) {
     return result;
 }
 
-double PriceAnalytic(BinModel Model, int N, double K, double (*Payoff)(double z, double K)) {
+double lecture2::PriceAnalytic(lecture2::BinModel Model, int N, double K, double (*Payoff)(double z, double K)) {
     double q = Model.RiskNeutralProb();
     std::vector<double> PDF(N + 1);
     double PDF_Sum = 0.0;
@@ -57,7 +57,7 @@ double PriceAnalytic(BinModel Model, int N, double K, double (*Payoff)(double z,
     }
     for (int i=0; i<=N; i++)
     {
-        PDF[i] = NewtonSymb(N, i) * pow(q, i) * pow(1 - q, N - i); // binomial distribution
+        PDF[i] = lecture2::NewtonSymb(N, i) * pow(q, i) * pow(1 - q, N - i); // binomial distribution
         PDF_Sum += PDF[i];
         Sum += PDF[i] * Price[i];
     }

@@ -9,10 +9,10 @@ set(gtest_force_shared_crt
     CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-file(GLOB lecture1_src
+file(GLOB src_code
      "../src/*/*.cpp"
 )
-add_executable(unit_test main.cpp lecture1_test.cpp ${lecture1_src})
+add_executable(unit_test main.cpp lecture1_test.cpp lecture2_test.cpp ${src_code})
 target_link_libraries(unit_test GTest::gtest_main)
 add_test(NAME all_unit_tests COMMAND unit_test)
 
