@@ -14,7 +14,7 @@ file(GLOB lecture1_src
 )
 add_executable(unit_test main.cpp lecture1_test.cpp ${lecture1_src})
 target_link_libraries(unit_test GTest::gtest_main)
-add_test(NAME example_test COMMAND unit_test)
+add_test(NAME all_unit_tests COMMAND unit_test)
 
 include(GoogleTest)
 gtest_discover_tests(unit_test)
