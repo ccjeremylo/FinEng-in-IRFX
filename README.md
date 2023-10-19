@@ -1,28 +1,29 @@
 # Financial Engineering in IRFX in C++
 
 * Following structure of [this course](https://www.city.ac.uk/prospective-students/courses/short-courses/financial-engineering-in-interest-rates-and-fx-cplusplus-applications-in-quantitative-finance). Topics Include:
-** Binomial tree/pricer (function pointers and OO design)
-** American options (using OO features)
-** Monte Carlo methods (exotic payoffs and variance reduction techniques)
-** Non linear solvers for implied vol
-** Curve building
-** Short rate modelling (calibration, bond options, multi-factor HW)
-** HJM (Cheyette model, IR option pricing)
-** LMM (change of numeraire, PCA, stoch vol)
-** SABR
-** etc...
+  - Binomial tree/pricer (function pointers and OO design)
+  - American options (using OO features)
+  - Monte Carlo methods (exotic payoffs and variance reduction techniques)
+  - Non linear solvers for implied vol
+  - Curve building
+  - Short rate modelling (calibration, bond options, multi-factor HW)
+  - HJM (Cheyette model, IR option pricing)
+  - LMM (change of numeraire, PCA, stoch vol)
+  - SABR
+  - etc...
 * Contributions are more than welcome!
-* The format/set-up of this repo is large based on [this repo](https://github.com/KYLChiu/ExoticMonteCarloEngine/tree/master). Special thanks for [Kelvin](https://github.com/KYLChiu) for letting me copy his set up.
+* The format/set-up of this repo is large based on [another repo](https://github.com/KYLChiu/ExoticMonteCarloEngine/tree/master). Special thanks for [Kelvin](https://github.com/KYLChiu) for letting me copy his set up.
 
 ## Features
-* Python interface of c++ code using pybind
+* Python interface of c++ code using pybind (to be added)
+* Gtest
 
 ## Requirements
 * CMake (version >= 3.18).
-* C++17 compliant compiler.
+* C++11 compliant compiler.
 
-## Install
-Build::
+## Install, Build, and Run
+Build:
 ```
 cd {path-to-repo}/FINENG-IN-IRFX/build
 cmake ../
