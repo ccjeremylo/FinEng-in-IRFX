@@ -15,14 +15,14 @@ TEST(FINENG, riskNeutralProbTest)
     EXPECT_TRUE(std::abs(q - (R-D) / (U-D)) < 0.0000001) << "Incorrect risk neutral prob function";
 }
 
-TEST(FINENG, binomialCoeffTest)
+TEST(L1, binomialCoeffTest)
 {
     EXPECT_EQ(lecture1::NewtonSymb(1, 1), 1) << "Trivial case failed!";
     EXPECT_EQ(lecture1::NewtonSymb(10, 1), 10) << "Trivial case failed!";
     EXPECT_EQ(lecture1::NewtonSymb(15, 6), 5005) << "Non-rrivial case failed!";
 }
 
-TEST(FINENG, equityTreeTest)
+TEST(L1, equityTreeTest)
 {
     double S0 = 10.0;
     double U = 0.1;
@@ -38,21 +38,21 @@ TEST(FINENG, equityTreeTest)
     EXPECT_TRUE(std::abs(lecture1::S(S0, U, D, N2, i2) -S0*std::pow((1+U),3)*std::pow((1+D),2)) < epsilon ) << "Non-trivial case failed!";
 }
 
-TEST(FINENG, vanillaCallPayOffs)
+TEST(L1, vanillaCallPayOffs)
 {
     EXPECT_EQ(lecture1::CallPayoff(10.1, 2.1), 8.0) << "Vanilla call ITM case failed!";
     EXPECT_EQ(lecture1::CallPayoff(2.3, 10.4), 0.0) << "Vanilla call OTM case failed!";
     EXPECT_EQ(lecture1::CallPayoff(100.2, 100.2), 0.0) << "Vanilla call ATM case failed!";
 }
 
-TEST(FINENG, vanillaPutPayOffs)
+TEST(L1, vanillaPutPayOffs)
 {
     EXPECT_EQ(lecture1::PutPayoff(10.1, 2.1), 0.0) << "Vanilla put OTM case failed!";
     EXPECT_EQ(lecture1::PutPayoff(2.3, 10.4), 10.4-2.3) << "Vanilla put ITM case failed!";
     EXPECT_EQ(lecture1::PutPayoff(100.2, 100.2), 0.0) << "Vanilla put ATM case failed!";
 }
 
-TEST(FINENG, analyticBinomialPricer)
+TEST(L1, analyticBinomialPricer)
 {
     double S0 = 10.0;
 
@@ -65,7 +65,7 @@ TEST(FINENG, analyticBinomialPricer)
     double price = lecture1::PriceAnalytic(S0, U, D, R, N, K, lecture1::PutPayoff);
 }
 
-TEST(FINENG, CRRBinomialTest)
+TEST(L1, CRRBinomialTest)
 {
     double S0 = 110.0;
     double r = 0.001;
@@ -96,7 +96,7 @@ TEST(FINENG, CRRBinomialTest)
     
 }
 
-TEST(FINENG, numericalAndBSPrice)
+TEST(L1, numericalAndBSPrice)
 {
     double S0 = 80.0;
     double r = 0.02;

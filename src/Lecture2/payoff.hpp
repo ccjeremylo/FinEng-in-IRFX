@@ -12,9 +12,10 @@
 #include <cmath>
 #include <math.h>
 
+namespace lecture2 {
+
 //computing payoff
 double CallPayoff(double z, double K);
-
 double PutPayoff(double z, double K);
 
-double DoubleBarrierPayoff(double z, double K);
+}

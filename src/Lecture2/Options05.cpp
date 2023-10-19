@@ -7,9 +7,9 @@
 
 #include "Options05.hpp"
 
-EurOption::EurOption(int N) : N_(N) {};
+lecture2::EurOption::EurOption(int N) : N_(N) {};
 
-double EurOption::PriceByCRR(BinModel Model, double K) {
+double lecture2::EurOption::PriceByCRR(lecture2::BinModel Model, double K) {
     double q = Model.RiskNeutralProb();
     double Price[N_+1];
     for (int i = 0 ; i <= N_; i++) { // payoff
@@ -24,19 +24,19 @@ double EurOption::PriceByCRR(BinModel Model, double K) {
  }
 
 
-Call::Call(int N) : EurOption(N) {
+lecture2::Call::Call(int N) : lecture2::EurOption(N) {
     SetPayoff(CallPayoff);
 }
 
-Put::Put(int N) : EurOption(N) {
+lecture2::Put::Put(int N) : lecture2::EurOption(N) {
     SetPayoff(PutPayoff);
 }
 
-DoubleBarrierCall::DoubleBarrierCall(int N, double UpperB, double LowerB) : EurOption(N), UpperB_(UpperB), LowerB_(LowerB) {
+lecture2::DoubleBarrierCall::DoubleBarrierCall(int N, double UpperB, double LowerB) : lecture2::EurOption(N), UpperB_(UpperB), LowerB_(LowerB) {
     SetPayoff(CallPayoff);
 }
 
-double DoubleBarrierCall::PriceByCRR(BinModel Model, double K) {
+double lecture2::DoubleBarrierCall::PriceByCRR(lecture2::BinModel Model, double K) {
     double q = Model.RiskNeutralProb();
     double Price[N_+1];
     for (int i = 0 ; i <= N_; i++) { // payoff

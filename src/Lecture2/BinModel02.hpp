@@ -13,6 +13,8 @@
 #include <math.h>
 #include <limits>
 
+namespace lecture2 {
+
 class BinModel {
 public:
     BinModel(double S0, double U, double D, double R);
@@ -28,3 +30,5 @@ private:
     double T_;
     
 };
+
+}

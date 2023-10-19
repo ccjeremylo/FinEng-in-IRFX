@@ -1,9 +1,9 @@
 cmake_minimum_required(VERSION 3.18)
 project(FINENG)
-file(GLOB helloworld_SRC
+file(GLOB src_code
      "./src/*/*.cpp"
 )
-add_executable(exec ./src/main.cpp ${helloworld_SRC})
+add_executable(exec ./src/main.cpp ${src_code})
 
 enable_testing()
 add_subdirectory(tests)

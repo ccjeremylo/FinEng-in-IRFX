@@ -15,6 +15,7 @@
 #include "payoff.hpp"
 #include "BinModel02.hpp"
 
+namespace lecture2 {
 
 class EurOption
 {
@@ -59,7 +60,7 @@ class DoubleBarrierCall: public EurOption
 {
 public:
     DoubleBarrierCall(int N, double UpperB, double LowerB); // KO option
-    double PriceByCRR(BinModel Model, double K);
+    double PriceByCRR(lecture2::BinModel Model, double K);
     double GetK(){return K_;}
     double GetUpperB(){return UpperB_;}
     double GetLowerB(){return LowerB_;}
@@ -69,3 +70,5 @@ private:
     double UpperB_;
     double LowerB_;
 };
+
+}

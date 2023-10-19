@@ -15,14 +15,20 @@
 #include "BinModel02.hpp"
 #include "payoff.hpp"
 
+namespace lecture2 {
+
 void getOptionsInputData(int& N, double& K);
 
+double NewtonSymb(int N, int i);
+
 // pricing European option
-double PriceByCRR(BinModel Model, int N, double K, double (*Payoff)(double z, double K));
+double PriceByCRR(lecture2::BinModel Model, int N, double K, double (*Payoff)(double z, double K));
 
 //computing payoff
 double CallPayoff(double z, double K);
 double PutPayoff(double z, double K);
 
 // analytical pricer
-double PriceAnalytic(BinModel Model, int N, double K, double (*Payoff)(double z, double K));
+double PriceAnalytic(lecture2::BinModel Model, int N, double K, double (*Payoff)(double z, double K));
+
+}
