@@ -1,4 +1,10 @@
 cmake_minimum_required(VERSION 3.18)
-project(FINENG-IN-IRFX)
+project(FINENG)
+file(GLOB helloworld_SRC
+     "./src/*/*.cpp"
+)
+add_executable(exec ./src/main.cpp ${helloworld_SRC})
 
-add_executable(FINENG-IN-IRFX src/main.cpp)
+enable_testing()
+add_subdirectory(tests)
+
