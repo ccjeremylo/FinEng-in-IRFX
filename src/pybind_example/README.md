@@ -43,12 +43,12 @@ python3 -m venv .venv
 ```
 ls .venv/lib/{your python3 version}/site-packages/
 ```
-9. ALL DONE! Let's now sanity check that we can actually import the module in python
+9. ALL DONE! Let's now sanity check that we can actually import our module in python venv
 ```
-python3 pybind_example.py
+./.venv/bin/python pybind_example.py
 ```
 
-### Using pybind
+## Using pybind
 
 Tbd...
 
