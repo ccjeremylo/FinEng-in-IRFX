@@ -9,6 +9,7 @@ set(gtest_force_shared_crt
     CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
+# this needs improving 
 file(GLOB src_code
      "../src/*/*.cpp"
 )
