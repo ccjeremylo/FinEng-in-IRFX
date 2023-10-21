@@ -1,9 +1,11 @@
 # Using and setting up pybind
 
-Following content is adapted based on this [YouTube video](https://www.youtube.com/watch?v=H2wOlriHGmM)! <br />
-Ideally should automate the following into a shell script...
+
 
 ##  Setting up ```pybind11``` for the first time!
+
+The following content is adapted based on this [YouTube video](https://www.youtube.com/watch?v=H2wOlriHGmM)! <br />
+Ideally should automate the following into a shell script... <br />
 
 Git clone ```pybind11``` repo to the root of this repo
 ```
@@ -36,20 +38,49 @@ Set up a virtual environment in the python sub-folder
 cd src/python
 python3 -m venv .venv
 ```
+(Sanity checking) Check that you see a hidden folder ```.venv```
+```
+ls -a
+```
 Install the c++ package we generated to the venv
 ```
-./.venv/bin/pip install ../dist/{name of the .whl file}
+./.venv/bin/pip install ../../dist/{name of the .whl file}
 ```
 (Sanity checking) Check that you see a ```.so``` file in venv packages folder
 ```
 ls .venv/lib/{your python3 version}/site-packages/
 ```
-ALL DONE! Let's now sanity check that we can actually import our module in python venv
+ALL DONE! Let's now sanity check that we can actually import the module in python venv
 ```
 ./.venv/bin/python pybind_example.py
 ```
 
-## Using pybind
+## Set up ```pybind11``` for jupyter notebooks for the first time
 
-Tbd...
+Assume you have already set up the virtual environment ```.venv``` appropriately, we now activate the venv
+```
+source .venv/bin/activate
+```
+Personally, I use [fish](https://fishshell.com/) as my unix shell, so to activate the venv, I run instead
+```
+source .venv/bin/activate.fish
+```
+Make sure you have deactivated your base environment (sometimes it is automatically activated). Now install ```ipykernel```
+```
+./.venv/bin/pip install ipykernel
+```
+Install all the required packages
+```
+./.venv/bin/pip install -r requirements.txt
+```
+Install a Jupyter kernel in our virtual environment
+```
+ipython kernel install --user --name=.venv
+```
+Launch jupyter notebook/lab (I prefer ```jupuyter lab```)
+```
+jupyter lab
+```
+Make sure you run your notebooks with the kernel ```.venv```! See [this link](https://www.linkedin.com/pulse/how-use-virtual-environment-inside-jupyter-lab-sina-khoshgoftar/) for reference. <br />
 
+For sanity checking, try running the notebook ```pybind_example_nb.ipynb``` to make sure everything works!
