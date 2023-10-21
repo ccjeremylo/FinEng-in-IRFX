@@ -1,6 +1,8 @@
 # Financial Engineering in IRFX in C++
 
-* Following structure of [this course](https://www.city.ac.uk/prospective-students/courses/short-courses/financial-engineering-in-interest-rates-and-fx-cplusplus-applications-in-quantitative-finance). Topics Include:
+Following structure of [this course](https://www.city.ac.uk/prospective-students/courses/short-courses/financial-engineering-in-interest-rates-and-fx-cplusplus-applications-in-quantitative-finance). <br />
+
+Topics Include:
   - Binomial tree/pricer 
   - American options
   - Monte Carlo methods
@@ -10,14 +12,16 @@
   - HJM
   - LMM 
   - SABR
-  - etc...
-* Contributions are more than welcome!
-* The current format/set-up is large based on [this repo](https://github.com/KYLChiu/ExoticMonteCarloEngine/tree/master). Special thanks for [Kelvin](https://github.com/KYLChiu) for letting me copy his set up.
+  - etc...<br />
+  
+Contributions are **more** than welcome! <br />
+
+The current format/set-up is large based on [this repo](https://github.com/KYLChiu/ExoticMonteCarloEngine/tree/master). Special thanks for [Kelvin](https://github.com/KYLChiu) for letting me copy his set up.
 
 ## Features
-* Python interface of c++ code using ```pybind``` ([to be added](https://github.com/ccjeremylo/FinEng-in-IRFX/issues/9))
+* Python interface of c++ code using ```pybind11``` (see this [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/feature/issue-%239-set-up-python-interface/src/pybind_example/README.md) for more info)
 * Unit test suite supported by ```gtest```
-* auto CICD ([to be added](https://github.com/ccjeremylo/FinEng-in-IRFX/issues/15))
+* CICD ([to be added](https://github.com/ccjeremylo/FinEng-in-IRFX/issues/15))
 * auto formatting
 
 ## Requirements
@@ -25,19 +29,19 @@
 * C++11 compliant compiler
 
 ## Install, Build, and Run
-Build:
+#### Build:
 ```
 cd {path-to-repo}/FINENG-IN-IRFX/build
 cmake ../
 make
 ./exec
 ```
-Run tests:
+#### Run tests:
 ```
 ctest --tests ./build
 ```
-Set up pybind11:
-* see this readme file for details
+#### Set up & using ```pybind11```:
+See this separate [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/feature/issue-%239-set-up-python-interface/src/pybind_example/README.md) for details
 
 ## Project Structure
 * The library can be found [here](https://github.com/ccjeremylo/FinEng-in-IRFX/tree/main/src).
