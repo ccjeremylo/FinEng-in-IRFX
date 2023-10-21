@@ -1,7 +1,6 @@
-print("Testing pybind11...\n")
-
 import cmake_example
 
+print("Testing pybind11...\n")
 # a and b must be int, they are strongly typed!
 a = 1
 b = 2
