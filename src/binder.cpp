@@ -7,6 +7,8 @@
 
 namespace py = pybind11;
 
+// at the moment, just going to manually add new functions/classes here
+// there might be a smarter way to do this...?
 PYBIND11_MODULE(cmake_example, m) {
     m.doc() = R"pbdoc(
         Pybind11 example plugin
@@ -16,12 +18,17 @@ PYBIND11_MODULE(cmake_example, m) {
 
         .. autosummary::
            :toctree: _generatec
+        
+           times
+           adding
+           subtracting
 
-           add
-           subtract
-           S
+           L1_riskNeutralProb
     )pbdoc";
 
+    // -----------------
+    // Toy examples
+    
     m.def("times", &mymath_ns::multiply_doubles, R"pbdoc(
         mutiply 2 numbers
     )pbdoc", py::arg("a"), py::arg("b"));
@@ -33,6 +40,16 @@ PYBIND11_MODULE(cmake_example, m) {
     m.def("subtracting", [](int i, int j) { return i - j; }, R"pbdoc(
         Subtract two integers
     )pbdoc", py::arg("i"), py::arg("j"));
+
+    // -----------------
+    // Lecture 1
+
+    m.def("L1_riskNeutralProb", &lecture1::riskNeutralProb, R"pbdoc(
+        Compute risk neutral prob for up move in Binomial model
+    )pbdoc", py::arg("U"), py::arg("D"), py::arg("R"));
+
+    // -----------------
+    // Lecture 2
 
     m.attr("__version__") = "0.0.1";
 
