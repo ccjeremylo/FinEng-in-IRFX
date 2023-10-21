@@ -5,7 +5,7 @@
 #include "../src/Lecture1/Options01.hpp"
 
 
-TEST(FINENG, riskNeutralProbTest)
+TEST(L1, riskNeutralProbTest)
 {
     double R = 0.02;
     double U = 0.1;

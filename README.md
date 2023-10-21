@@ -16,7 +16,7 @@ Topics Include:
   
 Contributions are **more** than welcome! <br />
 
-The current format/set-up is large based on [this repo](https://github.com/KYLChiu/ExoticMonteCarloEngine/tree/master). Special thanks for [Kelvin](https://github.com/KYLChiu) for letting me copy his set up.
+The current format/set-up is largely based on [this repo](https://github.com/KYLChiu/ExoticMonteCarloEngine/tree/master). Special thanks for [Kelvin](https://github.com/KYLChiu) for letting me copy his set up.
 
 ## Features
 * Python interface of c++ code using ```pybind11``` (see this [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for more info)

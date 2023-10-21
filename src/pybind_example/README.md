@@ -3,7 +3,7 @@
 Following content is adapted based on this [YouTube video](https://www.youtube.com/watch?v=H2wOlriHGmM)! <br />
 Ideally should automate the following into a shell script...
 
-##  Setting up pybind11 for the first time!
+##  Setting up ```pybind11``` for the first time!
 
 Git clone ```pybind11``` repo to the root of this repo
 ```
