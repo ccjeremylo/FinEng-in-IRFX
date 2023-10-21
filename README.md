@@ -36,12 +36,27 @@ cmake ../
 make
 ./exec
 ```
-### Run tests:
+### Run tests (in build folder):
 ```
 ctest --tests ./build
 ```
+### Build and run tests (from root of repo) - script:
+The following scripts only work for linux/macOS users:
+```
+./build_and_test_proj.sh
+```
+
 ### Set up & using ```pybind11```:
-See this separate [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for details
+See this separate [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for details <br />
+
+The following scripts only work for linux/macOS users - best to refer to the [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) when setting up:
+```
+./deploy_cpp_module.sh
+```
+Now, you can also launch a jupyter notebook session using the required venv by running:
+```
+./launch_jupyter.sh
+```
 
 ## Project Structure
 * The library can be found [here](https://github.com/ccjeremylo/FinEng-in-IRFX/tree/main/src).
