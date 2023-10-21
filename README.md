@@ -36,6 +36,8 @@ Run tests:
 ```
 ctest --tests ./build
 ```
+Set up pybind11:
+* see this readme file for details
 
 ## Project Structure
 * The library can be found [here](https://github.com/ccjeremylo/FinEng-in-IRFX/tree/main/src).
