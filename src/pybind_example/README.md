@@ -24,6 +24,7 @@ ls
 ```
 Building our c++ package (python module) ```cmake_example``` (to be renamed...)
 ```
+cd ..
 python3 setup.py bdist_wheel
 ```
 (Sanity checking) Check that you see a ```.whl``` file in the generated ```dist``` folder
@@ -32,12 +33,12 @@ ls dist/
 ```
 Set up a virtual environment in the python sub-folder
 ```
-cd python
+cd src/python
 python3 -m venv .venv
 ```
 Install the c++ package we generated to the venv
 ```
-./venv/bin/pip install ../dist/{name of the .whl file}
+./.venv/bin/pip install ../dist/{name of the .whl file}
 ```
 (Sanity checking) Check that you see a ```.so``` file in venv packages folder
 ```
