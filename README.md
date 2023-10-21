@@ -47,7 +47,7 @@ This likely only works for linux/macOS users:
 ```
 
 ### Set up & using ```pybind11```:
-See this separate [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for details
+See this separate [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for details <br />
 
 This likely only works for linux/macOS users - best to refer to the [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) when setting up:
 ```
