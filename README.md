@@ -28,7 +28,7 @@ The current format/set-up is largely based on [this repo](https://github.com/KYL
 * CMake 
 * C++11 compliant compiler
 
-## Install, Build, and Run
+## Install, Build & Run
 ### Build:
 ```
 cd {path-to-repo}/FINENG-IN-IRFX/build

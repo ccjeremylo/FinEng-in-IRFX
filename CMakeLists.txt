@@ -11,8 +11,8 @@ add_library(fineng_code STATIC ${src_code})
 set_target_properties(fineng_code PROPERTIES POSITION_INDEPENDENT_CODE ON)
 
 add_subdirectory(pybind11)
-pybind11_add_module(cmake_example ./src/binder.cpp)
-target_link_libraries(cmake_example PRIVATE fineng_code)
+pybind11_add_module(fineng_irfx ./src/binder.cpp)
+target_link_libraries(fineng_irfx PRIVATE fineng_code)
 
 enable_testing()
 add_subdirectory(tests)
