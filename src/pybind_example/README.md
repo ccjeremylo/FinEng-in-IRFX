@@ -5,7 +5,7 @@
 ##  Setting up ```pybind11``` for the first time!
 
 The following content is adapted based on this [YouTube video](https://www.youtube.com/watch?v=H2wOlriHGmM)! <br />
-Ideally should automate the following into a shell script... <br />
+The following has been automated into a simple shell script ```deploy_cpp_module.sh``` (only works for linux and macOS). <br />
 
 Git clone ```pybind11``` repo to the root of this repo
 ```
@@ -18,13 +18,13 @@ cd build
 cmake ..
 make
 make fineng_code
-make cmake_example
+make fineng_irfx
 ```
 (Sanity checking) Check that you now see a ```.a``` and ```.so``` file in your build folder
 ```
 ls
 ```
-Building our c++ package (python module) ```cmake_example``` (to be renamed...)
+Building our c++ package (python module) ```fineng_irfx``` 
 ```
 cd ..
 python3 setup.py bdist_wheel
@@ -56,6 +56,8 @@ ALL DONE! Let's now sanity check that we can actually import the module in pytho
 ```
 
 ## Set up ```pybind11``` for jupyter notebooks for the first time
+
+The following has been automated into a simple shell script ```launch_jupyter.sh``` (only works for linux/macOS) <br />
 
 Assume you have already set up the virtual environment ```.venv``` appropriately, we now activate the venv
 ```
