@@ -7,8 +7,7 @@ mkdir build
 cd build
 cmake ..
 make
-make fineng_code
-make cmake_example
+make fineng_irfx
 
 echo "FINISH BUILD!!"
 

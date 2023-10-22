@@ -28,7 +28,7 @@ The current format/set-up is largely based on [this repo](https://github.com/KYL
 * CMake 
 * C++11 compliant compiler
 
-## Install, Build, and Run
+## Install, Build & Run
 ### Build:
 ```
 cd {path-to-repo}/FINENG-IN-IRFX/build
@@ -49,11 +49,13 @@ The following scripts only work for linux/macOS users:
 ### Set up & using ```pybind11```:
 See this separate [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for details <br />
 
-The following scripts only work for linux/macOS users - best to refer to the [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) when setting up:
+The following scripts only work for linux/macOS users - best to refer to the [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) when setting up. <br />
+
+Install our c++ package ```fineng_irfx``` into the virtual env ```.venv```:
 ```
 ./deploy_cpp_module.sh
 ```
-Now, you can also launch a jupyter notebook session using the required venv by running:
+Now, you can also launch a jupyter notebook session with the required virtual env by running:
 ```
 ./launch_jupyter.sh
 ```

@@ -1,5 +1,5 @@
 black
-cmake_example
+fineng_irfx
 gitchangelog
 isort
 jupyterlab

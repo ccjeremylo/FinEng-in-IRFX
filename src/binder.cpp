@@ -9,12 +9,12 @@ namespace py = pybind11;
 
 // at the moment, just going to manually add new functions/classes here
 // there might be a smarter way to do this...?
-PYBIND11_MODULE(cmake_example, m) {
+PYBIND11_MODULE(fineng_irfx, m) {
     m.doc() = R"pbdoc(
         Pybind11 example plugin
         -----------------------
 
-        .. currentmodule:: cmake_example
+        .. currentmodule:: fineng_irfx
 
         .. autosummary::
            :toctree: _generatec
