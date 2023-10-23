@@ -7,7 +7,7 @@ Topics Include:
   - American options
   - Monte Carlo methods
   - Non linear solvers for implied vol
-  - Curve building
+  - Curve construction
   - Short rate modelling
   - HJM
   - LMM 
@@ -16,17 +16,19 @@ Topics Include:
   
 Contributions are **more** than welcome! <br />
 
-The current format/set-up is largely based on [this repo](https://github.com/KYLChiu/ExoticMonteCarloEngine/tree/master). Special thanks for [Kelvin](https://github.com/KYLChiu) for letting me copy his set up.
+The current format/set-up is largely based on [this repo](https://github.com/KYLChiu/ExoticMonteCarloEngine/tree/master). Special thanks to [Kelvin](https://github.com/KYLChiu) for letting me copy his set up.
 
 ## Features
 * Python interface of c++ code using ```pybind11``` (see this [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for more info)
 * Unit test suite supported by ```gtest```
-* CICD ([to be added](https://github.com/ccjeremylo/FinEng-in-IRFX/issues/15))
+* CI/CD integrated ([to be added](https://github.com/ccjeremylo/FinEng-in-IRFX/issues/15))
 * Auto formatting (tbd)
 
 ## Requirements
 * CMake 
 * C++11 compliant compiler
+* Python3
+* Gtest
 
 ## Install, Build & Run
 ### Build:
@@ -49,7 +51,7 @@ The following scripts only work for linux/macOS users:
 ### Set up & using ```pybind11```:
 See this separate [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for details <br />
 
-The following scripts only work for linux/macOS users - best to refer to the [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) when setting up. <br />
+The following scripts only work for linux/macOS users (and assumes dependencies have been installed) - best to refer to this [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for setting up. <br />
 
 Install our c++ package ```fineng_irfx``` into the virtual env ```.venv```:
 ```
@@ -75,14 +77,14 @@ Now, you can also launch a jupyter notebook session with the required virtual en
 
 ### Lecture 2
 * Binomial tree option pricing continued:
-  - improved code design by using objects
-  - pricing american and path-dependent options
+  - improved code design by using OO design patterns
+  - pricing american and path-dependent options 
   - CRR binomial model, numerical and analytical
   - connection to Black Scholes
 
 ### Lecture 3
 * Monte Carlo pricing:
-  - pricing american and path-dependent options
+  - pricing vanilla options
   - using Box-muller as RNG
   - discretisation error in long stepping (terminal correlation)
   - Monte Carlo error analysis and convergence

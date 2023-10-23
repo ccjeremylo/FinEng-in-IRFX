@@ -48,7 +48,7 @@ double lecture2::DoubleBarrierCall::PriceByCRR(lecture2::BinModel Model, double 
         }
     }
     for ( int n = N_ - 1 ; n >= 0 ; n-- ) { // fill backwards by expectation
-        for (int i = 0; i <= n; i++) { // requires double for loop to build entire tree
+        for (int i = 0; i <= n; i++) { // requires nested for-loop to build entire tree
             double S_ni = Model.S(n,i);
             if (S_ni >= UpperB_ || S_ni <= LowerB_) {
                 *(Price+i) = 0;
