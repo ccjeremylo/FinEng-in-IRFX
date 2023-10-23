@@ -1,5 +1,7 @@
 # Financial Engineering in IRFX in C++
 
+![Repo Status](https://github.com/ccjeremylo/FinEng-in-IRFX/actions/workflows/cpp-ubuntu.yml/badge.svg?branch=main)
+
 Following structure of [this course](https://www.city.ac.uk/prospective-students/courses/short-courses/financial-engineering-in-interest-rates-and-fx-cplusplus-applications-in-quantitative-finance). <br />
 
 Topics Include:
