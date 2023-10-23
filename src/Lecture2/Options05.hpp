@@ -17,8 +17,9 @@
 
 namespace lecture2 {
 
-// don't like this design, options should have no knowledge about the model
-// and definately should not know current level of S and r
+// Don't like this design, options should have no knowledge about the model
+// Current design only accepts binomial model..!
+// Additionally, K should be a property of the option, not the pricer
 class EurOption
 {
 public:
@@ -34,7 +35,7 @@ protected:
 };
 
 
-// Poor design!! Using a payoff class would be better (no constrain on constructor)
+// Poor design!! Using a payoff class would be better 
 class Call: public EurOption
 {
 public:
@@ -45,7 +46,7 @@ private:
     double K_;
 };
 
-// Poor design!! Using a payoff class would be better (no constrain on constructor)
+// Poor design!! Using a payoff class would be better 
 class Put: public EurOption
 {
 public:

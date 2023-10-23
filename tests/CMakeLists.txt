@@ -12,8 +12,9 @@ FetchContent_MakeAvailable(googletest)
 # this needs improving 
 file(GLOB src_code
      "../src/*/*.cpp"
+     "*.cpp"
 )
-add_executable(unit_test main.cpp lecture1_test.cpp lecture2_test.cpp ${src_code})
+add_executable(unit_test ${src_code})
 target_link_libraries(unit_test GTest::gtest_main)
 add_test(NAME all_unit_tests COMMAND unit_test)
 
