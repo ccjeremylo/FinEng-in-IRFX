@@ -16,7 +16,7 @@ Topics Include:
   - SABR
   - etc... <br />
   
-Contributions are **more** than welcome! <br />
+Contributions are *more* than welcome! <br />
 
 The current format/set-up is largely based on [this repo](https://github.com/KYLChiu/ExoticMonteCarloEngine/tree/master). Special thanks to [Kelvin](https://github.com/KYLChiu) for letting me copy his set up.
 
@@ -34,13 +34,15 @@ The current format/set-up is largely based on [this repo](https://github.com/KYL
 
 ## Install, Build & Run
 
-### Build (from root of repo):
+*All commands* below are assumed to be run from root of the repo, unless specified otherwise.
+
+### Build:
 ```
 cmake -S ./ -B build
 cmake --build build
-./exec
+./build/exec
 ```
-### Run tests (in build folder):
+### Run tests:
 ```
 ctest --test-dir ./build
 ```

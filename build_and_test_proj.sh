@@ -7,6 +7,6 @@ mkdir build
 cd build
 cmake ..
 make
-ctest --tests ./build
+ctest --tests .
 
 echo "Done! :) "
