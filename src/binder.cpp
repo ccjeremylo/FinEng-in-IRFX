@@ -48,6 +48,14 @@ PYBIND11_MODULE(fineng_irfx, m) {
         Compute risk neutral prob for up move in Binomial model
     )pbdoc", py::arg("U"), py::arg("D"), py::arg("R"));
 
+    m.def("L1_NewtonSymb", &lecture1::NewtonSymb, R"pbdoc(
+        Compute Binomial coeff
+    )pbdoc", py::arg("N"), py::arg("i"));
+
+    m.def("L1_S", &lecture1::S, R"pbdoc(
+        Generate stock tree
+    )pbdoc", py::arg("S0"), py::arg("U"), py::arg("D"), py::arg("n"), py::arg("i"));
+
     // -----------------
     // Lecture 2
 

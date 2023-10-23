@@ -57,11 +57,11 @@ See this separate [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blo
 
 The following scripts only work for linux/macOS users (and assumes dependencies have been installed) - best to refer to this [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for setting up. <br />
 
-Install our c++ package ```fineng_irfx``` into the virtual env ```.venv```:
+Install our c++ package ```fineng_irfx``` (python binding) into the virtual env ```.venv```:
 ```
 ./deploy_cpp_module.sh
 ```
-Now, you can also launch a jupyter notebook session with the required virtual env by running:
+Now, you can also launch a jupyter lab session with the required virtual env:
 ```
 ./launch_jupyter.sh
 ```
