@@ -1,5 +1,5 @@
 black
-fineng_irfx
+black[jupyter]
 gitchangelog
 isort
 jupyterlab
@@ -7,5 +7,7 @@ matplotlib
 mypy
 numpy
 pandas
+pylint
+pycodestyle
 pytest
 scipy
