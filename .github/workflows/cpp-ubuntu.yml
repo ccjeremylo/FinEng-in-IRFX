@@ -18,8 +18,11 @@ jobs:
       - name: pull dependencies
         run: git clone https://github.com/pybind/pybind11.git
 
+      - name: generate build folder
+        run: mkdir build/
+
       - name: build
-        run: cmake . build/
+        run: cmake --build build/
 
       - name: test
         run: ctest --tests ./build
