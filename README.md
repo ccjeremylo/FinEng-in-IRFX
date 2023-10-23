@@ -21,9 +21,9 @@ Contributions are **more** than welcome! <br />
 The current format/set-up is largely based on [this repo](https://github.com/KYLChiu/ExoticMonteCarloEngine/tree/master). Special thanks to [Kelvin](https://github.com/KYLChiu) for letting me copy his set up.
 
 ## Features
-* Python interface of c++ code using ```pybind11``` (see this [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for more info)
-* Unit test suite supported by ```gtest```
-* CI/CD integrated ([to be added](https://github.com/ccjeremylo/FinEng-in-IRFX/issues/15))
+* Python binding of c++ code via [```pybind11```](https://github.com/pybind/pybind11) (see this [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for more info)
+* Unit test suite supported by [```gtest```](https://github.com/google/googletest)
+* CI/CD integrated via [Github Actions](https://github.com/features/actions)
 * Auto formatting (tbd)
 
 ## Requirements
@@ -33,16 +33,16 @@ The current format/set-up is largely based on [this repo](https://github.com/KYL
 * Gtest
 
 ## Install, Build & Run
-### Build:
+
+### Build (from root of repo):
 ```
-cd {path-to-repo}/FINENG-IN-IRFX/build
-cmake ../
-make
+cmake -S ./ -B build
+cmake --build build
 ./exec
 ```
 ### Run tests (in build folder):
 ```
-ctest --tests ./build
+ctest --test-dir ./build
 ```
 ### Build and run tests (from root of repo) - script:
 The following scripts only work for linux/macOS users:
