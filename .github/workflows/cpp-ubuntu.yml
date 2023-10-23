@@ -1,0 +1,22 @@
+name: C++
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-release:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        id: checkout
+
+      - name: build
+        run: cmake --build build
+
+      - name: test
+        run: ctest --tests ./build
