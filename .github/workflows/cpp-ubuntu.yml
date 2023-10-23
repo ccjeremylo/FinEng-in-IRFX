@@ -16,7 +16,7 @@ jobs:
         id: checkout
 
       - name: build
-        run: cmake --. build
+        run: cmake . build
 
       - name: test
         run: ctest --tests ./build
