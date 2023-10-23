@@ -628,7 +628,7 @@ FodyWeavers.xsd
 
 
 # ================================
-# Others
+# CMake
 # ================================
 
 CMakeLists.txt.user
