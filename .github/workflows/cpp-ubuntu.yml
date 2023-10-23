@@ -10,13 +10,13 @@ on:
 
 jobs:
   build-release:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
         id: checkout
 
       - name: build
-        run: cmake --build build
+        run: cmake --. build
 
       - name: test
         run: ctest --tests ./build
