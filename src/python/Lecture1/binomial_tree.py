@@ -96,7 +96,7 @@ class BinomialTree:
         B = -(1.0 + self._b) / self._a
         u = self._quadratic_solver(1.0, B, 1.0, True)
         self._U = u - 1.0
-        self._D = 1.0 / (self._U + 1.0) - 1.0
+        self._D = 1.0 / u - 1.0
         assert abs(u * (self._D + 1.0) - 1.0) < 1e-7, f"{1+self._U} * {1+self._D} != 1"
 
     def _JR(self):
