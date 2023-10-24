@@ -30,7 +30,7 @@ The current format/set-up is largely based on [this repo](https://github.com/KYL
 ## Requirements
 * CMake 
 * C++11 compliant compiler
-* Python3
+* Python3.7 or above
 * Gtest
 
 ## Install, Build & Run
@@ -100,15 +100,13 @@ Now, you can also launch a jupyter lab session with the required virtual env:
   - using Box-muller as RNG
   - pricing path-dependent payoffs (barrier/Asian)
   - discretisation error in long stepping (terminal correlation)
-  - Monte Carlo error analysis and convergence
-  - risks computation & error analysis
  
 ### Lecture 4
 * Monte Carlo methods continued:
+  - Monte Carlo error analysis and convergence
   - variance reduction techniques
+  - pricing arithmetic asian with geometric asian as control variate
   - error analysis continued
   - pricing early excerise payoffs (American/Bermudans)
-  - pricing basket options
-  - pricing path-dependent basket options
+  - risks computation & error analysis
 
-  
