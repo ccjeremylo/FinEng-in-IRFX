@@ -24,6 +24,7 @@ The current format/set-up is largely based on [this repo](https://github.com/KYL
 * Python binding of c++ code via [```pybind11```](https://github.com/pybind/pybind11) (see this [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for more info)
 * Unit test suite supported by [```googletest```](https://github.com/google/googletest)
 * CI/CD via [Github Actions](https://github.com/features/actions)
+* Code review of jupyter notebooks via [ReviewNB App](https://github.com/apps/review-notebook-app)
 * Auto formatting (tbd)
 
 ## Requirements
