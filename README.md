@@ -46,8 +46,8 @@ cmake --build build
 ```
 ctest --test-dir ./build
 ```
-### Build and run tests (from root of repo) - script:
-The following scripts only work for linux/macOS users:
+### Build and run tests:
+The following script only works for linux/macOS users:
 ```
 ./build_and_test_proj.sh
 ```
@@ -83,17 +83,31 @@ Now, you can also launch a jupyter lab session with the required virtual env:
 * Binomial tree option pricing continued:
   - improve code design by using OO design patterns
   - pricing path-dependent (knock-out) options
-  - CRR binomial model, numerical and analytical implementation
+  - CRR model, numerical/analytical implementation
   - connection to Black Scholes
+  - risks computation via finite differencing
 
 ### Lecture 3
 * Binomial tree option pricing continued:
   - pricing early excerise payoffs (American/Bermudans)
   - introduction of C++ templates
   - multiple inheritance in C++
+  - numerical stability and convergence speed
 
-* Monte Carlo pricing:
+* Monte Carlo methods:
   - pricing vanilla options
   - using Box-muller as RNG
+  - pricing path-dependent payoffs (barrier/Asian)
   - discretisation error in long stepping (terminal correlation)
   - Monte Carlo error analysis and convergence
+  - risks computation & error analysis
+ 
+### Lecture 4
+* Monte Carlo methods continued:
+  - variance reduction techniques
+  - error analysis continued
+  - pricing early excerise payoffs (American/Bermudans)
+  - pricing basket options
+  - pricing path-dependent basket options
+
+  
