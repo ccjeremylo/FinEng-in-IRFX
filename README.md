@@ -23,7 +23,7 @@ The current format/set-up is largely based on [this repo](https://github.com/KYL
 ## Features
 * Python binding of c++ code via [```pybind11```](https://github.com/pybind/pybind11) (see this [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for more info)
 * Unit test suite supported by [```googletest```](https://github.com/google/googletest)
-* CI/CD via [Github Actions](https://github.com/features/actions)
+* CI via [Github Actions](https://github.com/features/actions)
 * Code review of jupyter notebooks via [ReviewNB App](https://github.com/apps/review-notebook-app)
 * Auto formatting (tbd)
 
@@ -56,9 +56,9 @@ The following script only works for linux/macOS users:
 ### Set up & using ```pybind11```:
 See this separate [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for details <br />
 
-The following scripts only work for linux/macOS users (and assumes dependencies have been installed) - best to refer to this [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for setting up. <br />
+The following scripts only work for linux/macOS users (and assumes dependencies have been installed) - best to refer to this [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for set up. <br />
 
-Install our c++ package ```fineng_irfx``` (python binding) into the virtual env ```.venv```:
+Install our c++ python binding ```fineng_irfx``` into the virtual env ```.venv```:
 ```
 ./deploy_cpp_module.sh
 ```
@@ -68,9 +68,10 @@ Now, you can also launch a jupyter lab session with the required virtual env:
 ```
 
 ## Project Structure
-* The library can be found [here](https://github.com/ccjeremylo/FinEng-in-IRFX/tree/main/src).
-* Example tests can be found [here](https://github.com/ccjeremylo/FinEng-in-IRFX/tree/main/tests).
-* Project to-do list are [here](https://github.com/ccjeremylo/FinEng-in-IRFX/issues).
+* The C++ can be found [here](https://github.com/ccjeremylo/FinEng-in-IRFX/tree/main/src)
+* The Python can be found [here](https://github.com/ccjeremylo/FinEng-in-IRFX/tree/main/src/python)
+* Example tests can be found [here](https://github.com/ccjeremylo/FinEng-in-IRFX/tree/main/tests)
+* Project to-do list are [here](https://github.com/ccjeremylo/FinEng-in-IRFX/issues)
 
 
 ### Lecture 1
@@ -106,7 +107,7 @@ Now, you can also launch a jupyter lab session with the required virtual env:
   - Monte Carlo error analysis and convergence
   - variance reduction techniques
   - pricing arithmetic asian with geometric asian as control variate
+  - pricing barrier with vanilla option as control variate
   - error analysis continued
   - pricing early excerise payoffs (American/Bermudans)
   - risks computation & error analysis
-
