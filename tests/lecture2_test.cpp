@@ -54,6 +54,20 @@ TEST(L2, vanillaPutPayOffs)
     EXPECT_EQ(lecture2::PutPayoff(100.2, 100.2), 0.0) << "Vanilla put ATM case failed!";
 }
 
+TEST(L2,digitalCallPayOffs)
+{
+    EXPECT_EQ(lecture2::DigitalCallPayoff(10.1, 2.1), 1.0) << "Digital call ITM case failed!";
+    EXPECT_EQ(lecture2::DigitalCallPayoff(2.3, 10.4), 0.0) << "Digital call OTM case failed!";
+    EXPECT_EQ(lecture2::DigitalCallPayoff(100.2, 100.2), 0.0) << "Digital call ATM case failed!";
+}
+
+TEST(L2, digitalPutPayOffs)
+{
+    EXPECT_EQ(lecture2::DigitalPutPayoff(10.1, 2.1), 0.0) << "Digital put OTM case failed!";
+    EXPECT_EQ(lecture2::DigitalPutPayoff(2.3, 10.4), 1.0) << "Digital put ITM case failed!";
+    EXPECT_EQ(lecture2::DigitalPutPayoff(100.2, 100.2), 0.0) << "Digital put ATM case failed!";
+}
+
 TEST(L2, CRRBinomialTest)
 {
     double S0 = 110.0;

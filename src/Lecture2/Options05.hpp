@@ -57,6 +57,26 @@ private:
     double K_;
 };
 
+class DigitalCall: public EurOption
+{
+public:
+    DigitalCall(int N);
+    double GetK(){return K_;}
+
+private:
+    double K_;
+};
+
+// Poor design!! Using a payoff class would be better 
+class DigitalPut: public EurOption
+{
+public:
+    DigitalPut(int N);
+    double GetK(){return K_;}
+
+private:
+    double K_;
+};
 
 // Poor design!! should be using a decorator...
 class DoubleBarrierCall: public EurOption

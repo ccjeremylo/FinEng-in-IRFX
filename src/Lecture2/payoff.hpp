@@ -18,4 +18,7 @@ namespace lecture2 {
 double CallPayoff(double z, double K);
 double PutPayoff(double z, double K);
 
+double DigitalCallPayoff(double z, double K);
+double DigitalPutPayoff(double z, double K);
+
 }
