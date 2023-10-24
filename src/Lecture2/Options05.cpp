@@ -32,6 +32,14 @@ lecture2::Put::Put(int N) : lecture2::EurOption(N) {
     SetPayoff(PutPayoff);
 }
 
+lecture2::DigitalCall::DigitalCall(int N) : lecture2::EurOption(N) {
+    SetPayoff(DigitalCallPayoff);
+}
+
+lecture2::DigitalPut::DigitalPut(int N) : lecture2::EurOption(N) {
+    SetPayoff(DigitalPutPayoff);
+}
+
 lecture2::DoubleBarrierCall::DoubleBarrierCall(int N, double UpperB, double LowerB) : lecture2::EurOption(N), UpperB_(UpperB), LowerB_(LowerB) {
     SetPayoff(CallPayoff);
 }

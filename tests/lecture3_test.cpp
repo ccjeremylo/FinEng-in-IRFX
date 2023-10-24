@@ -88,18 +88,22 @@ TEST(L3, americanOption)
     lecture2::BinModel BinModel1 = lecture2::BinModel(S0, U, D, R);
     lecture3::Call CallOption = lecture3::Call(K, N);
     lecture3::Put PutOption = lecture3::Put(K, N);
+    lecture3::Call CallOption2N = lecture3::Call(K, 2*N);
+    lecture3::Put PutOption2N = lecture3::Put(K, 2*N);
     
-    // Vanilla Call
-    double am_call_price = CallOption.PriceBySnell(BinModel1);
-    EXPECT_TRUE(am_call_price > 0.0);
+    // American Call
     double price_bs_call = lecture2::call_price(S0, K, r, sigma, T);
-    double abs_diff_call = am_call_price -price_bs_call;
-    EXPECT_TRUE(abs_diff_call > 0.0);
+    EXPECT_TRUE(price_bs_call > 0.0);
+    double am_call_price = CallOption.PriceBySnell(BinModel1);
+    EXPECT_TRUE(am_call_price > price_bs_call);
+    double am_call_price_2N = CallOption2N.PriceBySnell(BinModel1);
+    EXPECT_TRUE(am_call_price_2N > am_call_price);
     
-    // Vanilla Put
-    double am_put_price =  PutOption.PriceBySnell(BinModel1);
-    EXPECT_TRUE(am_put_price > 0.0);
+    // American Put
     double price_bs_put = lecture2::put_price(S0, K, r, sigma, T);
-    double abs_diff_put = am_put_price -price_bs_put;
-    EXPECT_TRUE(abs_diff_put > 0.0);
+    EXPECT_TRUE(price_bs_put > 0.0);
+    double am_put_price =  PutOption.PriceBySnell(BinModel1);
+    EXPECT_TRUE(am_put_price > price_bs_put);
+    double am_put_price_2N = PutOption2N.PriceBySnell(BinModel1);
+    EXPECT_TRUE(am_put_price_2N > am_put_price);
 }
