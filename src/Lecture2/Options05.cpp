@@ -10,19 +10,16 @@
 
 lecture2::EurOption::EurOption(int N) : N_(N){};
 
-double
-    lecture2::EurOption::SetTerminalPrice(double z, double K) {
+double lecture2::EurOption::SetTerminalPrice(double z, double K) {
     return Payoff_(z, K);
 };
 
-double
-    lecture2::EurOption::SetPrice(double upP, double downP, double q,
-                                  double R) {
+double lecture2::EurOption::SetPrice(double upP, double downP, double q,
+                                     double R) {
     return (q * upP + (1 - q) * downP) / (1. + R);
 };
 
-double
-    lecture2::EurOption::PriceByCRR(lecture2::BinModel Model, double K) {
+double lecture2::EurOption::PriceByCRR(lecture2::BinModel Model, double K) {
     double q = Model.RiskNeutralProb();
     double R = Model.GetR();
     double Price[N_ + 1];
@@ -70,9 +67,8 @@ lecture2::DoubleBarrierCall::DoubleBarrierCall(int N, double UpperB,
     SetPayoff(CallPayoff);
 }
 
-double
-    lecture2::DoubleBarrierCall::PriceByCRR(lecture2::BinModel Model,
-                                            double K) {
+double lecture2::DoubleBarrierCall::PriceByCRR(lecture2::BinModel Model,
+                                               double K) {
     double q = Model.RiskNeutralProb();
     double Price[N_ + 1];
     for (int i = 0; i <= N_; i++) {

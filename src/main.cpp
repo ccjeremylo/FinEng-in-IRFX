@@ -6,8 +6,7 @@
 
 #include <iostream>
 
-int
-    main() {
+int main() {
     std::cout << "Hello World! Local build is successful! :)" << std::endl;
 
     return 0;

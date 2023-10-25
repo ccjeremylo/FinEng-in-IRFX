@@ -8,8 +8,7 @@
 #include "Options04.hpp"
 #include <vector>
 
-void
-    lecture2::getOptionsInputData(int& N, double& K) {
+void lecture2::getOptionsInputData(int& N, double& K) {
     std::cout << "Enter steps to expiry N: ";
     std::cin >> N;
 
@@ -18,9 +17,8 @@ void
     std::cout << std::endl;
 }
 
-double
-    lecture2::PriceByCRR(lecture2::BinModel Model, int N, double K,
-                         double (*Payoff)(double z, double K)) {
+double lecture2::PriceByCRR(lecture2::BinModel Model, int N, double K,
+                            double (*Payoff)(double z, double K)) {
     double q = Model.RiskNeutralProb();
     double Price[N + 1];
     for (int i = 0; i <= N; i++) {  // payoff
@@ -37,8 +35,7 @@ double
 }
 
 // Binomial coefficient
-double
-    lecture2::NewtonSymb(int N, int i) {
+double lecture2::NewtonSymb(int N, int i) {
     if (i < 0 || i > N)
         return 0;
     double result = 1;
@@ -48,9 +45,8 @@ double
     return result;
 }
 
-double
-    lecture2::PriceAnalytic(lecture2::BinModel Model, int N, double K,
-                            double (*Payoff)(double z, double K)) {
+double lecture2::PriceAnalytic(lecture2::BinModel Model, int N, double K,
+                               double (*Payoff)(double z, double K)) {
     double q = Model.RiskNeutralProb();
     std::vector<double> PDF(N + 1);
     double PDF_Sum = 0.0;
