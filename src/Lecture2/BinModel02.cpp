@@ -7,20 +7,13 @@
 
 #include "BinModel02.hpp"
 
-double
-    lecture2::BinModel::RiskNeutralProb() {
-    return (R_ - D_) / (U_ - D_);
-}
+double lecture2::BinModel::RiskNeutralProb() { return (R_ - D_) / (U_ - D_); }
 
-double
-    lecture2::BinModel::S(int n, int i) {
+double lecture2::BinModel::S(int n, int i) {
     return S0_ * pow(1 + U_, i) * pow(1 + D_, n - i);
 }
 
-double
-    lecture2::BinModel::GetR() {
-    return R_;
-}
+double lecture2::BinModel::GetR() { return R_; }
 
 lecture2::BinModel::BinModel(double S0, double U, double D, double R)
     : S0_(S0), U_(U), D_(D), R_(R) {

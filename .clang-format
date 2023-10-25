@@ -25,7 +25,8 @@ UseTab: Never
 AllowShortIfStatementsOnASingleLine: false
 
 # change the next line to All for Alistair's textbook style
-AlwaysBreakAfterReturnType: TopLevelDefinitions
+# AlwaysBreakAfterReturnType: TopLevelDefinitions
+AlwaysBreakAfterReturnType: None
 
 # others
 DerivePointerAlignment: 'true'
@@ -36,3 +37,4 @@ ReferenceAlignment: Left
 SpaceAfterLogicalNot: 'true'
 SpaceAfterTemplateKeyword: 'true'
 Standard: Auto
+

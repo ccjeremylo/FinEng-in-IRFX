@@ -6,21 +6,23 @@
 //
 
 #pragma once
-#include "BinModel01.hpp"
 #include <fstream>
+#include "BinModel01.hpp"
 
 namespace lecture1 {
 
 void getOptionsInputData(int& N, double& K);
 
 // pricing European option
-double PriceByCRR(double S0 , double U, double D, double R, int N, double K, double (*Payoff)(double z, double K));
+double PriceByCRR(double S0, double U, double D, double R, int N, double K,
+                  double (*Payoff)(double z, double K));
 
-//computing payoff
+// computing payoff
 double CallPayoff(double z, double K);
 double PutPayoff(double z, double K);
 
 // analytical pricer
-double PriceAnalytic(double S0, double U, double D, double R, int N, double K, double (*Payoff)(double z, double K));
+double PriceAnalytic(double S0, double U, double D, double R, int N, double K,
+                     double (*Payoff)(double z, double K));
 
-}
+}  // namespace lecture1
