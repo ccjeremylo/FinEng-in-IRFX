@@ -7,91 +7,136 @@
 
 #pragma once
 
-#include <stdio.h>
-#include <iostream>
-#include <cmath>
 #include <math.h>
-
-#include "payoff.hpp"
+#include <stdio.h>
+#include <cmath>
+#include <iostream>
 #include "BinModel02.hpp"
+#include "payoff.hpp"
 
 namespace lecture2 {
 
 // Don't like this design, options should have no knowledge about the model
-// Current design only accepts binomial model..!
+// Current desigs only accepts binomial model..!
 // Additionally, K should be a property of the option, not the pricer
-class EurOption
-{
+class EurOption {
 public:
     EurOption(int N);
     virtual double PriceByCRR(BinModel Model, double K);
-    void SetPayoff(double (*Payoff)(double z, double K)) {
-        Payoff_ = Payoff;
-    }
-    
+
 protected:
+    void SetPayoff(double (*Payoff)(double z, double K)) { Payoff_ = Payoff; }
+    double SetTerminalPrice(double z, double K);
+    double SetPrice(double upP, double downP, double q, double R);
+
     int N_;
     double (*Payoff_)(double z, double K);
 };
 
-
-// Poor design!! Using a payoff class would be better 
-class Call: public EurOption
-{
+// Poor design! Use a payoff class
+class Call : public EurOption {
 public:
     Call(int N);
-    double GetK(){return K_;}
+    double GetK() { return K_; }
 
 private:
     double K_;
 };
 
-// Poor design!! Using a payoff class would be better 
-class Put: public EurOption
-{
+// Poor design! Use a payoff class
+class Put : public EurOption {
 public:
     Put(int N);
-    double GetK(){return K_;}
+    double GetK() { return K_; }
 
 private:
     double K_;
 };
 
-class DigitalCall: public EurOption
-{
+// Poor design! Use a payoff class
+class DigitalCall : public EurOption {
 public:
     DigitalCall(int N);
-    double GetK(){return K_;}
+    double GetK() { return K_; }
 
 private:
     double K_;
 };
 
-// Poor design!! Using a payoff class would be better 
-class DigitalPut: public EurOption
-{
+class DigitalPut : public EurOption {
 public:
     DigitalPut(int N);
-    double GetK(){return K_;}
+    double GetK() { return K_; }
 
 private:
     double K_;
 };
 
-// Poor design!! should be using a decorator...
-class DoubleBarrierCall: public EurOption
+/* //
+// Using decorator
+class DoubleBarrier : public EurOption
 {
 public:
-    DoubleBarrierCall(int N, double UpperB, double LowerB); // KO option
+    DoubleBarrier(EurOption *EurOptPtr, int N, double UpperB, double LowerB);
+
+    virtual double PriceByCRR(BinModel Model, double K) = 0;
+    double GetUpperB() { return UpperB_; }
+    double GetLowerB() { return LowerB_; }
+
+protected:
+    virtual double SetTerminalPrice(double z, double K) = 0;
+    virtual double SetPrice(double upP, double downP, double q, double R) = 0;
+
+    double K_;
+    double UpperB_;
+    double LowerB_;
+    EurOption *EurOptPtr_;
+};
+
+class
+DoubleBarrierKO
+:
+public
+DoubleBarrier
+{
+public:
+    DoubleBarrierKO(EurOption *EurOptPtr, int N, double UpperB, double LowerB);
+    double PriceByCRR(BinModel Model, double K);
+
+protected:
+    double SetTerminalPrice(double z, double K);
+    double SetPrice(double upP, double downP, double q, double R);
+};
+
+class
+DoubleBarrierKI
+:
+public
+DoubleBarrier
+{
+public:
+    DoubleBarrierKO(EurOption *EurOptPtr, int N, double UpperB, double LowerB);
+    double PriceByCRR(BinModel Model, double K);
+
+protected:
+    double SetTerminalPrice(double z, double K) = 0;
+    double SetPrice(double upP, double downP, double q, double R);
+}; */
+
+// Poor design, try use a decorator
+class DoubleBarrierCall : public EurOption {
+public:
+    DoubleBarrierCall(int N, double UpperB,
+                      double LowerB);  // KO option
     double PriceByCRR(lecture2::BinModel Model, double K);
-    double GetK(){return K_;}
-    double GetUpperB(){return UpperB_;}
-    double GetLowerB(){return LowerB_;}
-    
+    double GetK() { return K_; }
+    double GetUpperB() { return UpperB_; }
+    double GetLowerB() { return LowerB_; }
+
 private:
     double K_;
     double UpperB_;
     double LowerB_;
 };
 
-}
+}  // namespace lecture2

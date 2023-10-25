@@ -16,6 +16,6 @@ U = 0.02
 D = -0.02
 R = 0.01
 q = fe.L1_riskNeutralProb(U, D, R)
-print(f"Risk neutral up prob: q(U,D,R) = q({U},{D},{R}) = {q}", "\n")
+print(f"Risk neutral up prob: q(U, D, R) = q({U}, {D}, {R}) = {q}", "\n")
 
 print("Success!! :D")

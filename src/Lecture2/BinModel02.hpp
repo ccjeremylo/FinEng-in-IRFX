@@ -7,10 +7,10 @@
 
 #pragma once
 
-#include <stdio.h>
-#include <iostream>
-#include <cmath>
 #include <math.h>
+#include <stdio.h>
+#include <cmath>
+#include <iostream>
 #include <limits>
 
 namespace lecture2 {
@@ -21,14 +21,13 @@ public:
     double RiskNeutralProb();
     double S(int n, int i);
     double GetR();
-    
+
 private:
     double S0_;
     double U_;
     double D_;
     double R_;
     double T_;
-    
 };
 
-}
+}  // namespace lecture2
