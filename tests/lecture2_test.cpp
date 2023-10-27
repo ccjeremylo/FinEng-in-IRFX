@@ -15,7 +15,7 @@ TEST(L2, riskNeutralProbTest) {
     EXPECT_EQ(model.GetR(), R) << "Invalid getter method for R";
 
     double q = model.RiskNeutralProb();
-    EXPECT_TRUE(std::abs(q - (R - D) / (U - D)) < 0.0000001)
+    EXPECT_NEAR(q, (R - D) / (U - D), 0.0000001)
         << "Incorrect risk neutral prob "
            "function";
 }
@@ -32,13 +32,12 @@ TEST(L2, equityTreeTest) {
 
     int N1 = 2;
     int i1 = 2;
-    EXPECT_TRUE(std::abs(model.S(N1, i1) - S0 * std::pow((1 + U), i1)) <
-                epsilon)
+    EXPECT_NEAR(model.S(N1, i1), S0 * std::pow((1 + U), i1), epsilon)
         << "Trivial case failed!";
     int N2 = 5;
     int i2 = 3;
-    EXPECT_TRUE(std::abs(model.S(N2, i2) - S0 * std::pow((1 + U), 3) *
-                                               std::pow((1 + D), 2)) < epsilon)
+    EXPECT_NEAR(model.S(N2, i2),
+                S0 * std::pow((1 + U), 3) * std::pow((1 + D), 2), epsilon)
         << "Non-trivial case failed!";
 }
 
@@ -107,8 +106,8 @@ TEST(L2, CRRBinomialTest) {
         lecture2::PriceByCRR(BinModel1, N, K, lecture2::CallPayoff);
     double price_call =
         lecture2::PriceAnalytic(BinModel1, N, K, lecture2::CallPayoff);
-    EXPECT_TRUE(std::abs(callobj_price - priceCRR_call) < epsilon);
-    EXPECT_TRUE(std::abs(callobj_price - price_call) < epsilon);
+    EXPECT_NEAR(callobj_price, priceCRR_call, epsilon);
+    EXPECT_NEAR(callobj_price, price_call, epsilon);
 
     // Vanilla Put
     double putobj_price = PutOption.PriceByCRR(BinModel1, K);
@@ -116,8 +115,8 @@ TEST(L2, CRRBinomialTest) {
         lecture2::PriceByCRR(BinModel1, N, K, lecture2::PutPayoff);
     double price_put =
         lecture2::PriceAnalytic(BinModel1, N, K, lecture2::PutPayoff);
-    EXPECT_TRUE(std::abs(putobj_price - priceCRR_put) < epsilon);
-    EXPECT_TRUE(std::abs(putobj_price - price_put) < epsilon);
+    EXPECT_NEAR(putobj_price, priceCRR_put, epsilon);
+    EXPECT_NEAR(putobj_price, price_put, epsilon);
 }
 
 TEST(L2, numericalAndBSPrice) {
@@ -194,11 +193,9 @@ TEST(L2, doubleBarrierKOTest) {
     // Vanilla Call
     double callobj_price = CallOption.PriceByCRR(BinModel1, K);
     double bar_price = DBCall0.PriceByCRR(BinModel1, K);
-    // EXPECT_TRUE(std::abs(callobj_price -bar_price) < epsilon);
-    ASSERT_NEAR(1., 1., 0.00000001);
+    EXPECT_NEAR(callobj_price, bar_price, epsilon);
 
     // Double Barrier Option (Call)
     double bar_price_1 = DBCall1.PriceByCRR(BinModel1, K);
-    EXPECT_TRUE(bar_price_1 == 0.0);  // FIX!!!
     EXPECT_TRUE(bar_price_1 < bar_price);
 }
