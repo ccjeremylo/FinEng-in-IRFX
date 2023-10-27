@@ -6,22 +6,17 @@ while true; do
         [Yy]* ) "Building project from scratch."; 
             rm -r build/;
             rm -r src/python/.venv/;
-            mkdir build;
-            cd build;
-            cmake ..;
-            make;
-            make fineng_irfx;
-        break;;
-        [Nn]* ) "Program terminated - please run ./deploy_cpp_module.sh"; 
-            cd build;
-            make fineng_irfx;
-        break;;
+            cmake -S ./ -B build;
+            cmake --build build;
+            ctest --test-dir ./build;
+            break;;
+        [Nn]* ) "Great, we can continue"; 
+            break;;
         * ) echo "Please answer y or n.";;
     esac
 done
 
 # deploying the c++ package as a python module
-cd ..
 python3 setup.py bdist_wheel
 
 # install c++ package into .venv
