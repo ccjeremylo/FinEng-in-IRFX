@@ -1,5 +1,6 @@
 #include <pybind11/pybind11.h>
 #include "Lecture1/BinModel01.hpp"
+#include "Lecture2/BinModel02.hpp"
 #include "pybind_example/mymath.hpp"
 
 #define STRINGIFY(x) #x
@@ -11,9 +12,8 @@ namespace py = pybind11;
 // there might be a smarter way to do this...?
 PYBIND11_MODULE(fineng_irfx, m) {
     m.doc() = R"pbdoc(
-        Pybind11 example plugin
+        Pybind11 plugin
         -----------------------
-
         .. currentmodule:: fineng_irfx
 
         .. autosummary::
@@ -24,6 +24,9 @@ PYBIND11_MODULE(fineng_irfx, m) {
            subtracting
 
            L1_riskNeutralProb
+           L1_NewtonSymb
+
+           L2_BinModel
     )pbdoc";
 
     // -----------------
@@ -66,6 +69,15 @@ PYBIND11_MODULE(fineng_irfx, m) {
 
     // -----------------
     // Lecture 2
+
+    py::class_<lecture2::BinModel>(m, "L2_BinModel")
+        .def(py::init<double, double, double, double>())
+        .def("RiskNeutralProb", &lecture2::BinModel::RiskNeutralProb)
+        .def("S", &lecture2::BinModel::S)
+        .def_property_readonly("GetR", &lecture2::BinModel::GetR);
+
+    // -----------------
+    // Set package version number
 
     m.attr("__version__") = "0.0.1";
 }
