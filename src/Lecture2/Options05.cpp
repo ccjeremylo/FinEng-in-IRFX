@@ -6,6 +6,7 @@
 //
 
 #include "Options05.hpp"
+
 #include <cassert>
 
 lecture2::EurOption::EurOption(int N) : N_(N){};
@@ -19,7 +20,8 @@ double lecture2::EurOption::SetPrice(double upP, double downP, double q,
     return (q * upP + (1 - q) * downP) / (1. + R);
 };
 
-double lecture2::EurOption::PriceByCRR(lecture2::BinModel Model, double K) {
+double lecture2::EurOption::PriceByCRR(lecture2::BinModel Model,
+                                       double K) {
     double q = Model.RiskNeutralProb();
     double R = Model.GetR();
     double Price[N_ + 1];
@@ -38,9 +40,13 @@ double lecture2::EurOption::PriceByCRR(lecture2::BinModel Model, double K) {
     return *Price;
 }
 
-lecture2::Call::Call(int N) : lecture2::EurOption(N) { SetPayoff(CallPayoff); }
+lecture2::Call::Call(int N) : lecture2::EurOption(N) {
+    SetPayoff(CallPayoff);
+}
 
-lecture2::Put::Put(int N) : lecture2::EurOption(N) { SetPayoff(PutPayoff); }
+lecture2::Put::Put(int N) : lecture2::EurOption(N) {
+    SetPayoff(PutPayoff);
+}
 
 lecture2::DigitalCall::DigitalCall(int N) : lecture2::EurOption(N) {
     SetPayoff(DigitalCallPayoff);
@@ -51,9 +57,8 @@ lecture2::DigitalPut::DigitalPut(int N) : lecture2::EurOption(N) {
 }
 
 /* // barrier
-lecture2::DoubleBarrier::DoubleBarrier(lecture2::EurOption *EurOptPtr, int N,
-                                       double UpperB, double LowerB)
-    : lecture2::EurOption(N),
+lecture2::DoubleBarrier::DoubleBarrier(lecture2::EurOption *EurOptPtr, int
+N, double UpperB, double LowerB) : lecture2::EurOption(N),
       EurOptPtr_(EurOptPtr),
       UpperB_(UpperB),
       LowerB_(LowerB) {

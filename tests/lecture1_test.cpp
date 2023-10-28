@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "../src/Lecture1/BinModel01.hpp"
 #include "../src/Lecture1/BlackScholes.hpp"
 #include "../src/Lecture1/Options01.hpp"
@@ -16,7 +17,8 @@ TEST(L1, riskNeutralProbTest) {
 TEST(L1, binomialCoeffTest) {
     EXPECT_EQ(lecture1::NewtonSymb(1, 1), 1) << "Trivial case failed!";
     EXPECT_EQ(lecture1::NewtonSymb(10, 1), 10) << "Trivial case failed!";
-    EXPECT_EQ(lecture1::NewtonSymb(15, 6), 5005) << "Non-rrivial case failed!";
+    EXPECT_EQ(lecture1::NewtonSymb(15, 6), 5005)
+        << "Non-rrivial case failed!";
 }
 
 TEST(L1, equityTreeTest) {

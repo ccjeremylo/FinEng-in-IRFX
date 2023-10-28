@@ -6,6 +6,7 @@
 //
 
 #include "Options04.hpp"
+
 #include <vector>
 
 void lecture2::getOptionsInputData(int& N, double& K) {
@@ -27,8 +28,9 @@ double lecture2::PriceByCRR(lecture2::BinModel Model, int N, double K,
     for (int n = N - 1; n >= 0; n--) {  // fill backwards by expectation
         for (int i = 0; i <= n;
              i++) {  // requires double for loop to build entire tree
-            *(Price + i) = (q * (*(Price + i + 1)) + (1 - q) * (*(Price + i))) /
-                           (1. + Model.GetR());
+            *(Price + i) =
+                (q * (*(Price + i + 1)) + (1 - q) * (*(Price + i))) /
+                (1. + Model.GetR());
         }
     }
     return *Price;
@@ -65,8 +67,8 @@ double lecture2::PriceAnalytic(lecture2::BinModel Model, int N, double K,
         Sum += PDF[i] * Price[i];
     }
     // std::cout << " PDF_Sum = " << PDF_Sum << std::endl ;
-    double result =
-        Sum / pow(1. + Model.GetR(), N);  // expectation of discouted payoff
+    double result = Sum / pow(1. + Model.GetR(),
+                              N);  // expectation of discouted payoff
     delete[] Price;
     delete[] S_T;
     return result;

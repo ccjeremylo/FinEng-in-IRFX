@@ -7,7 +7,9 @@
 
 #include "BinModel02.hpp"
 
-double lecture2::BinModel::RiskNeutralProb() { return (R_ - D_) / (U_ - D_); }
+double lecture2::BinModel::RiskNeutralProb() {
+    return (R_ - D_) / (U_ - D_);
+}
 
 double lecture2::BinModel::S(int n, int i) {
     return S0_ * pow(1 + U_, i) * pow(1 + D_, n - i);

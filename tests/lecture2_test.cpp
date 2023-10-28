@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "../src/Lecture2/BinModel02.hpp"
 #include "../src/Lecture2/BlackScholes.hpp"
 #include "../src/Lecture2/Options04.hpp"
