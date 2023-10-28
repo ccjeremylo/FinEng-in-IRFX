@@ -3,7 +3,7 @@
 #include "../src/Lecture4/BSModel01.hpp"
 #include "../src/Lecture4/RNGenerator.hpp"
 
-TEST(L4, BoxMuller) {
+TEST(L4, BoxMullerSeed) {
     int seed1 = 1;
     int seed2 = 13;
 
@@ -22,4 +22,7 @@ TEST(L4, BoxMuller) {
     double G2a = BM2a.Gauss();
     EXPECT_EQ(G2a, BM2b.Gauss());
     EXPECT_TRUE(G2a != G1a);
+
+    EXPECT_EQ(BM1a.GetSeed(), seed1 + 4);
+    EXPECT_EQ(BM2b.GetSeed(), seed2 + 2);
 }

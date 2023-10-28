@@ -1,7 +1,11 @@
 #include "RNGenerator.hpp"
 
 rng::RNG::RNG(int seed)
-    : seed_(seed), PI_(4.0 * std::atan(1.0)), counter_(1){};
+    : seed_(seed),
+      PI_(4.0 * std::atan(1.0)),
+      counter_(1){
+          // checks that seed > 0
+      };
 
 int rng::RNG::GetSeed() { return seed_; };
 
