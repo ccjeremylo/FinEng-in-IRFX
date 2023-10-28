@@ -78,17 +78,17 @@ double lecture2::DoubleBarrierCall::PriceByCRR(lecture2::BinModel Model,
         } else {
             *(Price + i) = Payoff_(S_i, K);
         }
-        for (int n = N_ - 1; n >= 0; n--) {  // fill backwards by expectation
-            for (int i = 0; i <= n;
-                 i++) {  // requires nested for-loop to build entire tree
-                double S_ni = Model.S(n, i);
-                if (S_ni >= UpperB_ || S_ni <= LowerB_) {
-                    *(Price + i) = 0;
-                } else {
-                    *(Price + i) =
-                        (q * (*(Price + i + 1)) + (1 - q) * (*(Price + i))) /
-                        (1. + Model.GetR());
-                }
+    }
+    for (int n = N_ - 1; n >= 0; n--) {  // fill backwards by expectation
+        for (int i = 0; i <= n;
+             i++) {  // requires nested for-loop to build entire tree
+            double S_ni = Model.S(n, i);
+            if (S_ni >= UpperB_ || S_ni <= LowerB_) {
+                *(Price + i) = 0;
+            } else {
+                *(Price + i) =
+                    (q * (*(Price + i + 1)) + (1 - q) * (*(Price + i))) /
+                    (1. + Model.GetR());
             }
         }
     }

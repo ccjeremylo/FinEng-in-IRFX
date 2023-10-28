@@ -9,7 +9,7 @@ TEST(L1, riskNeutralProbTest) {
     double D = -0.1;
 
     double q = lecture1::riskNeutralProb(U, D, R);
-    EXPECT_TRUE(std::abs(q - (R - D) / (U - D)) < 0.0000001)
+    EXPECT_NEAR(q, (R - D) / (U - D), 0.0000001)
         << "Incorrect risk neutral prob function";
 }
 
@@ -28,14 +28,13 @@ TEST(L1, equityTreeTest) {
 
     int N1 = 2;
     int i1 = 2;
-    EXPECT_TRUE(std::abs(lecture1::S(S0, U, D, N1, i1) -
-                         S0 * std::pow((1 + U), i1)) < epsilon)
+    EXPECT_NEAR(lecture1::S(S0, U, D, N1, i1), S0 * std::pow((1 + U), i1),
+                epsilon)
         << "Trivial case failed!";
     int N2 = 5;
     int i2 = 3;
-    EXPECT_TRUE(std::abs(lecture1::S(S0, U, D, N2, i2) -
-                         S0 * std::pow((1 + U), 3) * std::pow((1 + D), 2)) <
-                epsilon)
+    EXPECT_NEAR(lecture1::S(S0, U, D, N2, i2),
+                S0 * std::pow((1 + U), 3) * std::pow((1 + D), 2), epsilon)
         << "Non-trivial case failed!";
 }
 
@@ -80,14 +79,14 @@ TEST(L1, CRRBinomialTest) {
         lecture1::PriceByCRR(S0, U, D, R, N, K, lecture1::CallPayoff);
     double price_call =
         lecture1::PriceAnalytic(S0, U, D, R, N, K, lecture1::CallPayoff);
-    EXPECT_TRUE(std::abs(priceCRR_call - price_call) < epsilon);
+    EXPECT_NEAR(priceCRR_call, price_call, epsilon);
 
     // Put
     double priceCRR_put =
         lecture1::PriceByCRR(S0, U, D, R, N, K, lecture1::PutPayoff);
     double price_put =
         lecture1::PriceAnalytic(S0, U, D, R, N, K, lecture1::PutPayoff);
-    EXPECT_TRUE(std::abs(priceCRR_put - price_put) < epsilon);
+    EXPECT_NEAR(priceCRR_put, price_put, epsilon);
 }
 
 TEST(L1, numericalAndBSPrice) {
