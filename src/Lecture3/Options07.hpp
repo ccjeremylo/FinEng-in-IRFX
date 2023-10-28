@@ -3,9 +3,11 @@
 
 #include <math.h>
 #include <stdio.h>
+
 #include <algorithm>
 #include <cmath>
 #include <iostream>
+
 #include "../Lecture2/BinModel02.hpp"
 
 namespace lecture3 {

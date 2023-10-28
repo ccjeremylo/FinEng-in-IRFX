@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "../src/Lecture2/BlackScholes.hpp"
 #include "../src/Lecture3/Options07.hpp"
 
@@ -7,7 +8,8 @@ TEST(L3, vanillaCallPayOffs) {
     lecture3::Call callOp = lecture3::Call(strike, 20);
     EXPECT_EQ(callOp.Payoff(strike + 13.3), strike + 13.3 - strike)
         << "Vanilla call ITM case failed!";
-    EXPECT_EQ(callOp.Payoff(strike), 0.0) << "Vanilla call ITM case failed!";
+    EXPECT_EQ(callOp.Payoff(strike), 0.0)
+        << "Vanilla call ITM case failed!";
     EXPECT_EQ(callOp.Payoff(strike / 2.0), 0.0)
         << "Vanilla call ITM case failed!";
 }
@@ -17,7 +19,8 @@ TEST(L3, vanillaPutPayOffs) {
     lecture3::Put putOp = lecture3::Put(strike, 3);
     EXPECT_EQ(putOp.Payoff(strike / 3.1), strike - strike / 3.1)
         << "Vanilla call ITM case failed!";
-    EXPECT_EQ(putOp.Payoff(strike), 0.0) << "Vanilla call ITM case failed!";
+    EXPECT_EQ(putOp.Payoff(strike), 0.0)
+        << "Vanilla call ITM case failed!";
     EXPECT_EQ(putOp.Payoff(strike * 2.0), 0.0)
         << "Vanilla call ITM case failed!";
 }
