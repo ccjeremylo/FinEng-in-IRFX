@@ -1,10 +1,12 @@
 #include "PathDepOption01.hpp"
 
-// Base class
+#include "../Lecture2/BlackScholes.hpp"
+
+// Base class - m should be property of Model
 lecture4::PathDepOption::PathDepOption(double T, int m, bool isCall)
     : T_(T), m_(m), isCall_(isCall){};
 
-double lecture4::PathDepOption::PriceByMC(lecture4::BSModel Model,
+double lecture4::PathDepOption::PriceByMC(lecture4::BSModel& Model,
                                           long N) {
     double H = 0.0;
     SamplePath S(m_);
@@ -57,6 +59,17 @@ double lecture4::Vanilla::Payoff(lecture4::SamplePath& S) {
         return std::max(S[m_ - 1] - K_, 0.0);
     } else {
         return std::max(K_ - S[m_ - 1], 0.0);
+    }
+}
+
+// Assumes BS Model
+double lecture4::Vanilla::PriceByFormula(lecture4::BSModel Model) {
+    if (isCall_) {
+        return lecture2::call_price(Model.GetS0(), K_, Model.GetR(),
+                                    Model.GetSigma(), T_);
+    } else {
+        return lecture2::put_price(Model.GetS0(), K_, Model.GetR(),
+                                   Model.GetSigma(), T_);
     }
 }
 

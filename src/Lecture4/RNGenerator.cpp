@@ -20,8 +20,8 @@ rng::BoxMueller::BoxMueller(int seed) : rng::RNG(seed){};
 
 double rng::BoxMueller::Gauss() {
     srand(seed_);
-    double U1 = (std::rand() + 1) / (RAND_MAX + 1.0);
-    double U2 = (std::rand() + 1) / (RAND_MAX + 1.0);
+    double U1 = (std::rand() + 1.0) / (RAND_MAX + 1.0);
+    double U2 = (std::rand() + 1.0) / (RAND_MAX + 1.0);
 
     incrementSeed();
     return sqrt(-2.0 * log(U1)) * cos(2.0 * PI_ * U2);

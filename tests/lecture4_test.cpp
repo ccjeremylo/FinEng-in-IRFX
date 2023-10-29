@@ -5,6 +5,10 @@
 #include "../src/Lecture4/PathDepOption01.hpp"
 #include "../src/Lecture4/RNGenerator.hpp"
 
+// ===============================
+// Testing Random Number Generators
+// ===============================
+
 TEST(L4, BoxMullerSeed) {
     int seed1 = 1;
     int seed2 = 13;
@@ -29,6 +33,32 @@ TEST(L4, BoxMullerSeed) {
     EXPECT_EQ(BM2b.GetSeed(), seed2 + 2);
 }
 
+TEST(L4, BoxMuller) {
+    int seed = 1;
+    rng::BoxMueller BM = rng::BoxMueller(seed);
+
+    double sum = 0.0;
+    double squared_sum = 0.0;
+
+    int N = 1000;
+    double rand_num = 0.0;
+    for (int i = 0; i < N; i++) {
+        rand_num = BM.Gauss();
+        sum += rand_num;
+        squared_sum += rand_num * rand_num;
+    }
+
+    double stderr = 1 / sqrt(N);
+    double mean = sum / N;
+    double variance = (squared_sum - sum * sum) / N;
+    EXPECT_NEAR(mean, 0.0, 3 * stderr) << "mean: " << mean;
+    EXPECT_NEAR(variance, 1.0, 3 * stderr) << "variance" << variance;
+}
+
+// ===============================
+// Testing Simulation Models
+// ===============================
+
 TEST(L4, BSModelZeroVol) {
     rng::BoxMueller BM = rng::BoxMueller(1);
 
@@ -48,32 +78,13 @@ TEST(L4, BSModelZeroVol) {
         EXPECT_NEAR(S[i], St, 1.0e-8)
             << "index i = " << i << ": S[i] = " << S[i]
             << ", expected: " << St << std::endl;
-        St *= exp(r * T / m);
+        St *= exp(r * T / (m - 1));
     }
 }
 
-TEST(L4, BSModelZeroVol2) {
-    rng::BoxMueller BM = rng::BoxMueller(1);
-
-    double S0 = 100.0;
-    double r = 0.03;
-    // zero vol
-    lecture4::BSModel Model = lecture4::BSModel(S0, r, 0.0, BM);
-    EXPECT_EQ(Model.GetR(), r);
-
-    int m = 5;
-    double T = 3.2;
-    lecture4::SamplePath S(m);
-    Model.GenerateSamplePath(T, m, S);
-
-    double St = S0;
-    for (int i = 0; i < m; i++) {
-        EXPECT_NEAR(S[i], St, 1.0e-8)
-            << "index i = " << i << ": S[i] = " << S[i]
-            << ", expected: " << St << std::endl;
-        St *= exp(r * T / m);
-    }
-}
+// ===============================
+// Testing Payoffs
+// ===============================
 
 TEST(L4, vanillaCallPayOffs) {
     double K = 100.0;
@@ -281,4 +292,61 @@ TEST(L4, geomAsianPutPayOffs) {
     expected = std::max(K - geomMean(S), 0.0);
     EXPECT_NEAR(Put.Payoff(S), expected, 1.0e-7)
         << "Terminal payoff: " << Put.Payoff(S) << std::endl;
+}
+
+// ===============================
+// Testing Pricer
+// ===============================
+
+TEST(L4, VanillaCallPricer) {
+    rng::BoxMueller BM = rng::BoxMueller(1);
+
+    double S0 = 100.0;
+    double r = 0.0;
+    double sigma = 0.1;  // works for zero vol...RNG issue?
+    lecture4::BSModel Model = lecture4::BSModel(S0, r, sigma, BM);
+
+    double K = 80.0;
+    int m = 2;
+    double T = 6.2;
+
+    // Call
+    lecture4::Vanilla Call = lecture4::Vanilla(T, m, K, true);
+
+    int PathCount = 500;
+    double MCPrice = Call.PriceByMC(Model, PathCount);
+    double BSPrice = Call.PriceByFormula(Model);
+
+    // allow for 5 std err tolerance
+    double tolerance = std::min(BSPrice * 5.0 / sqrt(PathCount), 2.0);
+    EXPECT_NEAR(MCPrice, BSPrice, tolerance)
+        << "MC: " << MCPrice << ", BS: " << BSPrice << std::endl;
+    EXPECT_EQ(BM.GetSeed(), (m - 1) * PathCount * 2)
+        << "Seed: " << BM.GetSeed()
+        << std::endl;  // seed is not incrementing!!!
+}
+
+TEST(L4, VanillaAnalyticalPricer) {
+    rng::BoxMueller BM = rng::BoxMueller(1);
+
+    double S0 = 100.0;
+    double r = 0.05;
+    double sigma = 0.3;
+    lecture4::BSModel Model = lecture4::BSModel(S0, r, sigma, BM);
+
+    double K = 79.0;
+    int m = 3;
+    double T = 6.2;
+
+    // Call
+    lecture4::Vanilla Call = lecture4::Vanilla(T, m, K, true);
+    double CallPrice = Call.PriceByFormula(Model);
+    double BSCallPrice = lecture2::call_price(S0, K, r, sigma, T);
+    EXPECT_NEAR(CallPrice, BSCallPrice, 1e-7) << "Call";
+
+    // Call
+    lecture4::Vanilla Put = lecture4::Vanilla(T, m, K, false);
+    double PutPrice = Put.PriceByFormula(Model);
+    double BSPutPrice = lecture2::put_price(S0, K, r, sigma, T);
+    EXPECT_NEAR(PutPrice, BSPutPrice, 1e-7) << "Put";
 }

@@ -11,7 +11,7 @@ namespace lecture4 {
 class PathDepOption {
 public:
     PathDepOption(double T, int m, bool isCall);
-    double PriceByMC(lecture4::BSModel Model, long N);
+    double PriceByMC(lecture4::BSModel& Model, long N);
 
     virtual double Payoff(lecture4::SamplePath& S) = 0;
 
@@ -46,6 +46,7 @@ class Vanilla : public PathDepOption {
 public:
     Vanilla(double T, int m, double K, bool isCall);
     double Payoff(lecture4::SamplePath& S);
+    double PriceByFormula(lecture4::BSModel Model);
 
 protected:
     double K_;
