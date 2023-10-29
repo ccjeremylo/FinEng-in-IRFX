@@ -9,8 +9,10 @@
 
 #include <math.h>
 #include <stdio.h>
+
 #include <cmath>
 #include <iostream>
+
 #include "BinModel02.hpp"
 #include "payoff.hpp"
 

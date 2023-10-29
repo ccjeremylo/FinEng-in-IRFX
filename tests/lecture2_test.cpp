@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "../src/Lecture2/BinModel02.hpp"
 #include "../src/Lecture2/BlackScholes.hpp"
 #include "../src/Lecture2/Options04.hpp"
@@ -15,7 +16,7 @@ TEST(L2, riskNeutralProbTest) {
     EXPECT_EQ(model.GetR(), R) << "Invalid getter method for R";
 
     double q = model.RiskNeutralProb();
-    EXPECT_NEAR(q, (R - D) / (U - D), 0.0000001)
+    EXPECT_NEAR(q, (R - D) / (U - D), 1.0e-8)
         << "Incorrect risk neutral prob "
            "function";
 }
@@ -28,7 +29,7 @@ TEST(L2, equityTreeTest) {
 
     lecture2::BinModel model = lecture2::BinModel(S0, U, D, R);
 
-    double epsilon = 0.0000001;
+    double epsilon = 1.0e-8;
 
     int N1 = 2;
     int i1 = 2;
@@ -93,7 +94,7 @@ TEST(L2, CRRBinomialTest) {
     double D = exp(v * h - sigma * pow(h, 0.5)) - 1;
     double R = exp(r * h) - 1;
 
-    double epsilon = 0.000001;
+    double epsilon = 1.0e-7;
 
     // Building the objects
     lecture2::BinModel BinModel1 = lecture2::BinModel(S0, U, D, R);
@@ -149,7 +150,7 @@ TEST(L2, numericalAndBSPrice) {
     double abs_err_call = std::abs(callobj_price - price_bs_call);
     double rel_err_call = abs_err_call / price_bs_call;
     EXPECT_TRUE(abs_err_call < epsilon);
-    EXPECT_TRUE(rel_err_call < 0.001);
+    EXPECT_TRUE(rel_err_call < 1.0e-3);
 
     // Vanilla Put
     double putobj_price = PutOption.PriceByCRR(BinModel1, K);
@@ -157,7 +158,7 @@ TEST(L2, numericalAndBSPrice) {
     double abs_err_put = std::abs(putobj_price - price_bs_put);
     double rel_err_put = abs_err_put / price_bs_put;
     EXPECT_TRUE(abs_err_put < epsilon);
-    EXPECT_TRUE(rel_err_put < 0.001);
+    EXPECT_TRUE(rel_err_put < 1.0e-3);
 }
 
 TEST(L2, doubleBarrierKOTest) {
@@ -180,7 +181,7 @@ TEST(L2, doubleBarrierKOTest) {
     double B_upper = 135;  // top barrier
     double B_lower = 50;   // bottom barrier
 
-    double epsilon = 0.00001;
+    double epsilon = 1.0e-5;
 
     // Building the classes
     lecture2::BinModel BinModel1 = lecture2::BinModel(S0, U, D, R);

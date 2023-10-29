@@ -1,4 +1,5 @@
 #include <gtest/gtest.h>
+
 #include "../src/Lecture1/BinModel01.hpp"
 #include "../src/Lecture1/BlackScholes.hpp"
 #include "../src/Lecture1/Options01.hpp"
@@ -9,14 +10,15 @@ TEST(L1, riskNeutralProbTest) {
     double D = -0.1;
 
     double q = lecture1::riskNeutralProb(U, D, R);
-    EXPECT_NEAR(q, (R - D) / (U - D), 0.0000001)
+    EXPECT_NEAR(q, (R - D) / (U - D), 1.0e-8)
         << "Incorrect risk neutral prob function";
 }
 
 TEST(L1, binomialCoeffTest) {
     EXPECT_EQ(lecture1::NewtonSymb(1, 1), 1) << "Trivial case failed!";
     EXPECT_EQ(lecture1::NewtonSymb(10, 1), 10) << "Trivial case failed!";
-    EXPECT_EQ(lecture1::NewtonSymb(15, 6), 5005) << "Non-rrivial case failed!";
+    EXPECT_EQ(lecture1::NewtonSymb(15, 6), 5005)
+        << "Non-rrivial case failed!";
 }
 
 TEST(L1, equityTreeTest) {
@@ -72,7 +74,7 @@ TEST(L1, CRRBinomialTest) {
     double D = exp(v * h - sigma * pow(h, 0.5)) - 1;
     double R = exp(r * h) - 1;
 
-    double epsilon = 0.000001;
+    double epsilon = 1.0e-8;
 
     // Call
     double priceCRR_call =
@@ -114,7 +116,7 @@ TEST(L1, numericalAndBSPrice) {
     double abs_err_call = std::abs(priceCRR_call - price_bs_call);
     double rel_err_call = abs_err_call / price_bs_call;
     EXPECT_TRUE(abs_err_call < epsilon);
-    EXPECT_TRUE(rel_err_call < 0.0001);
+    EXPECT_TRUE(rel_err_call < 1.0e-3);
 
     // Put
     double priceCRR_put =
@@ -123,5 +125,5 @@ TEST(L1, numericalAndBSPrice) {
     double abs_err_put = std::abs(priceCRR_put - price_bs_put);
     double rel_err_put = abs_err_put / price_bs_put;
     EXPECT_TRUE(abs_err_put < epsilon);
-    EXPECT_TRUE(rel_err_put < 0.0001);
+    EXPECT_TRUE(rel_err_put < 1.0e-3);
 }

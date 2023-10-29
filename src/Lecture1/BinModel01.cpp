@@ -27,7 +27,8 @@ void lecture1::getInputData(double &S0, double &U, double &D, double &R) {
     }
     // check for arb
     if (R <= D || R >= U) {
-        throw std::invalid_argument("Arb opp exists! Program is terminated");
+        throw std::invalid_argument(
+            "Arb opp exists! Program is terminated");
     }
 }
 

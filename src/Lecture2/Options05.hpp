@@ -9,8 +9,10 @@
 
 #include <math.h>
 #include <stdio.h>
+
 #include <cmath>
 #include <iostream>
+
 #include "BinModel02.hpp"
 #include "payoff.hpp"
 
@@ -25,7 +27,9 @@ public:
     virtual double PriceByCRR(BinModel Model, double K);
 
 protected:
-    void SetPayoff(double (*Payoff)(double z, double K)) { Payoff_ = Payoff; }
+    void SetPayoff(double (*Payoff)(double z, double K)) {
+        Payoff_ = Payoff;
+    }
     double SetTerminalPrice(double z, double K);
     double SetPrice(double upP, double downP, double q, double R);
 
@@ -77,7 +81,8 @@ private:
 class DoubleBarrier : public EurOption
 {
 public:
-    DoubleBarrier(EurOption *EurOptPtr, int N, double UpperB, double LowerB);
+    DoubleBarrier(EurOption *EurOptPtr, int N, double UpperB, double
+LowerB);
 
     virtual double PriceByCRR(BinModel Model, double K) = 0;
     double GetUpperB() { return UpperB_; }
@@ -85,7 +90,8 @@ public:
 
 protected:
     virtual double SetTerminalPrice(double z, double K) = 0;
-    virtual double SetPrice(double upP, double downP, double q, double R) = 0;
+    virtual double SetPrice(double upP, double downP, double q, double R) =
+0;
 
     double K_;
     double UpperB_;
@@ -100,8 +106,8 @@ public
 DoubleBarrier
 {
 public:
-    DoubleBarrierKO(EurOption *EurOptPtr, int N, double UpperB, double LowerB);
-    double PriceByCRR(BinModel Model, double K);
+    DoubleBarrierKO(EurOption *EurOptPtr, int N, double UpperB, double
+LowerB); double PriceByCRR(BinModel Model, double K);
 
 protected:
     double SetTerminalPrice(double z, double K);
@@ -115,8 +121,8 @@ public
 DoubleBarrier
 {
 public:
-    DoubleBarrierKO(EurOption *EurOptPtr, int N, double UpperB, double LowerB);
-    double PriceByCRR(BinModel Model, double K);
+    DoubleBarrierKO(EurOption *EurOptPtr, int N, double UpperB, double
+LowerB); double PriceByCRR(BinModel Model, double K);
 
 protected:
     double SetTerminalPrice(double z, double K) = 0;

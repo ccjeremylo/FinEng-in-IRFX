@@ -7,6 +7,7 @@
 
 #pragma once
 #include <fstream>
+
 #include "BinModel01.hpp"
 
 namespace lecture1 {
@@ -22,7 +23,7 @@ double CallPayoff(double z, double K);
 double PutPayoff(double z, double K);
 
 // analytical pricer
-double PriceAnalytic(double S0, double U, double D, double R, int N, double K,
-                     double (*Payoff)(double z, double K));
+double PriceAnalytic(double S0, double U, double D, double R, int N,
+                     double K, double (*Payoff)(double z, double K));
 
 }  // namespace lecture1

@@ -8,12 +8,12 @@ IndentWrappedFunctionNames: 'true'
 IndentCaseLabels: 'true'
 NamespaceIndentation: Inner
 
-# sorting:
+# includes:
 SortIncludes: 'true'
-SortUsingDeclarations: 'true'
+IncludeBlocks: Regroup
 
-# Must be 80 characters or less!
-ColumnLimit: 80
+# Must be 75 characters or less!
+ColumnLimit: 75
 
 # use \n instead of \r\n
 UseCRLF: false 
@@ -31,7 +31,7 @@ AlwaysBreakAfterReturnType: None
 # others
 DerivePointerAlignment: 'true'
 FixNamespaceComments: 'true'
-IncludeBlocks: Merge
+SortUsingDeclarations: 'true'
 PointerAlignment: Left
 ReferenceAlignment: Left
 SpaceAfterLogicalNot: 'true'
