@@ -1,4 +1,3 @@
-
 #pragma once
 
 #include <math.h>
@@ -18,6 +17,7 @@ class BSModel {
 public:
     BSModel(double S0, double r, double sigma, rng::RNG generator);
     void GenerateSamplePath(double T, int m, SamplePath& S);
+    double GetR();
 
 protected:
     double S0_;

@@ -64,7 +64,7 @@ TEST(L3, numericalAndBSPrice) {
     double abs_err_put = std::abs(putopt_price - price_bs_put);
     double rel_err_put = abs_err_put / price_bs_put;
     EXPECT_TRUE(abs_err_put < epsilon);
-    EXPECT_TRUE(rel_err_put < 0.001);
+    EXPECT_TRUE(rel_err_put < 1.0e-3);
 }
 
 TEST(L3, americanOption) {
