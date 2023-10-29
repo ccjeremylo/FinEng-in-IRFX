@@ -1,5 +1,8 @@
 #pragma once
 
+#include <cmath>
+#include <iostream>
+
 #include "BSModel01.hpp"
 
 namespace lecture4 {

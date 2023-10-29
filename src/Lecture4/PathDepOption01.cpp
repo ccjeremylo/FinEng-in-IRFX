@@ -1,8 +1,5 @@
 #include "PathDepOption01.hpp"
 
-#include <cmath>
-#include <iostream>
-
 // Base class
 lecture4::PathDepOption::PathDepOption(double T, int m, bool isCall)
     : T_(T), m_(m), isCall_(isCall){};
@@ -24,10 +21,11 @@ lecture4::ArthAsian::ArthAsian(double T, int m, double K, bool isCall)
     : PathDepOption(T, m, isCall), K_(K){};
 
 double lecture4::ArthAsian::Payoff(lecture4::SamplePath& S) {
-    double ave = 0;
+    double ave = 0.0;
     for (int k = 0; k < m_; k++) {
-        ave = (k * ave + S[k]) / (k + 1.0);
+        ave += S[k];
     }
+    ave *= 1.0 / m_;
     if (isCall_) {
         return std::max(ave - K_, 0.0);
     }
@@ -39,10 +37,11 @@ lecture4::GeomAsian::GeomAsian(double T, int m, double K, bool isCall)
     : PathDepOption(T, m, isCall), K_(K){};
 
 double lecture4::GeomAsian::Payoff(lecture4::SamplePath& S) {
-    double ave = 0;
+    double ave = 1.0;
     for (int k = 0; k < m_; k++) {
-        ave = pow((pow(ave, k) * S[k]), 1 / (k + 1.0));
+        ave *= S[k];
     }
+    ave = pow(ave, 1.0 / m_);
     if (isCall_) {
         return std::max(ave - K_, 0.0);
     }
@@ -55,9 +54,9 @@ lecture4::Vanilla::Vanilla(double T, int m, double K, bool isCall)
 
 double lecture4::Vanilla::Payoff(lecture4::SamplePath& S) {
     if (isCall_) {
-        return std::max(S[m_] - K_, 0.0);
+        return std::max(S[m_ - 1] - K_, 0.0);
     } else {
-        return std::max(K_ - S[m_], 0.0);
+        return std::max(K_ - S[m_ - 1], 0.0);
     }
 }
 
@@ -79,9 +78,9 @@ double lecture4::DoubleBarrierKO::Payoff(lecture4::SamplePath& S) {
     if (KO) {
         return 0;
     } else if (isCall_) {
-        return std::max(S[m_] - K_, 0.0);
+        return std::max(S[m_ - 1] - K_, 0.0);
     } else {
-        return std::max(K_ - S[m_], 0.0);
+        return std::max(K_ - S[m_ - 1], 0.0);
     }
 }
 
@@ -103,8 +102,8 @@ double lecture4::DoubleBarrierKI::Payoff(lecture4::SamplePath& S) {
     if (KI == false) {
         return 0;
     } else if (isCall_) {
-        return std::max(S[m_] - K_, 0.0);
+        return std::max(S[m_ - 1] - K_, 0.0);
     } else {
-        return std::max(K_ - S[m_], 0.0);
+        return std::max(K_ - S[m_ - 1], 0.0);
     }
 }

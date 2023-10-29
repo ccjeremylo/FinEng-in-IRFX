@@ -81,11 +81,11 @@ TEST(L4, vanillaCallPayOffs) {
     lecture4::Vanilla Call = lecture4::Vanilla(2.3, m, K, true);
 
     lecture4::SamplePath S(m);
-    S[m] = 10;
+    S[m - 1] = 10;
     EXPECT_NEAR(Call.Payoff(S), 0.0, 1e-7)
         << "Terminal payoff: " << Call.Payoff(S) << std::endl;
-    S[m] = 106.3;
-    EXPECT_NEAR(Call.Payoff(S), S[m] - K, 1e-7)
+    S[m - 1] = 106.3;
+    EXPECT_NEAR(Call.Payoff(S), S[m - 1] - K, 1e-7)
         << "Terminal payoff: " << Call.Payoff(S) << std::endl;
 }
 
@@ -95,10 +95,133 @@ TEST(L4, vanillaPutPayOffs) {
     lecture4::Vanilla Put = lecture4::Vanilla(9.3, m, K, false);
 
     lecture4::SamplePath S(m);
-    S[m] = 10.36;
-    EXPECT_NEAR(Put.Payoff(S), K - S[m], 1e-7)
+    S[m - 1] = 10.36;
+    EXPECT_NEAR(Put.Payoff(S), K - S[m - 1], 1e-7)
         << "Terminal payoff: " << Put.Payoff(S) << std::endl;
-    S[m] = 106.3;
+    S[m - 1] = 106.3;
     EXPECT_NEAR(Put.Payoff(S), 0.0, 1e-7)
+        << "Terminal payoff: " << Put.Payoff(S) << std::endl;
+}
+
+TEST(L4, doubleKOCallPayOffs) {
+    double K = 100.0;
+    int m = 3;
+    double Bup = 120.0;
+    double Bdown = 80.0;
+    lecture4::DoubleBarrierKO Call =
+        lecture4::DoubleBarrierKO(2.3, m, K, Bup, Bdown, true);
+
+    lecture4::SamplePath S(m);
+    S[0] = 100.0;
+    S[1] = 70.0;
+    S[2] = 106.0;
+    EXPECT_NEAR(Call.Payoff(S), 0.0, 1.0e-8)
+        << "Terminal payoff (KO): " << Call.Payoff(S) << std::endl;
+    S[1] = 110.0;
+    EXPECT_NEAR(Call.Payoff(S), 6.0, 1.0e-8)
+        << "Terminal payoff (ITM): " << Call.Payoff(S) << std::endl;
+    S[1] = 130.0;
+    EXPECT_NEAR(Call.Payoff(S), 0.0, 1.0e-8)
+        << "Terminal payoff (KO): " << Call.Payoff(S) << std::endl;
+    S[1] = 119.999999;
+    S[2] = K;
+    EXPECT_NEAR(Call.Payoff(S), 0.0, 1.0e-8)
+        << "Terminal payoff (ATM): " << Call.Payoff(S) << std::endl;
+    S[2] = 5.0;
+    EXPECT_NEAR(Call.Payoff(S), 0.0, 1.0e-8)
+        << "Terminal payoff (OTM): " << Call.Payoff(S) << std::endl;
+}
+
+TEST(L4, doubleKOPutPayOffs) {
+    double K = 100.0;
+    int m = 3;
+    double Bup = 120.0;
+    double Bdown = 80.0;
+    lecture4::DoubleBarrierKO Put =
+        lecture4::DoubleBarrierKO(2.3, m, K, Bup, Bdown, false);
+
+    lecture4::SamplePath S(m);
+    S[0] = 100.0;
+    S[1] = 79.99;
+    S[2] = 96.0;
+    EXPECT_NEAR(Put.Payoff(S), 0.0, 1.0e-8)
+        << "Terminal payoff: (KO)" << Put.Payoff(S) << std::endl;
+    S[1] = 110.0;
+    EXPECT_NEAR(Put.Payoff(S), 4.0, 1.0e-8)
+        << "Terminal payoff (ITM): " << Put.Payoff(S) << std::endl;
+    S[1] = 120.0;
+    EXPECT_NEAR(Put.Payoff(S), 0.0, 1.0e-8)
+        << "Terminal payoff: (KO)" << Put.Payoff(S) << std::endl;
+    S[1] = 80.00001;
+    S[2] = K;
+    EXPECT_NEAR(Put.Payoff(S), 0.0, 1.0e-8)
+        << "Terminal payoff (ATM): " << Put.Payoff(S) << std::endl;
+    S[2] = 102.9;
+    EXPECT_NEAR(Put.Payoff(S), 0.0, 1.0e-8)
+        << "Terminal payoff (OTM): " << Put.Payoff(S) << std::endl;
+}
+
+// add test for KI
+
+// add test for arith asian
+
+double geomMean(lecture4::SamplePath S) {
+    double product = 1.0;
+    for (double St : S) {
+        product *= St;
+    }
+    return pow(product, 1.0 / (sizeof(S) / sizeof(double)));
+}
+
+TEST(L4, geomMean) {
+    lecture4::SamplePath S(3);
+    S[0] = 100.0;
+    S[1] = 70.0;
+    S[2] = 106.0;
+    double expected = 90.53183053;
+    EXPECT_NEAR(geomMean(S), expected, 1.0e-4)
+        << "Geom mean = " << geomMean(S) << std::endl;
+
+    S[1] = 160.0;
+    expected = 119.2546392;
+    EXPECT_NEAR(geomMean(S), expected, 1.0e-4)
+        << "Geom mean = " << geomMean(S) << std::endl;
+}
+
+TEST(L4, geomAsianCallPayOffs) {
+    double K = 100.0;
+    int m = 3;
+    lecture4::GeomAsian Call = lecture4::GeomAsian(2.3, m, K, true);
+
+    lecture4::SamplePath S(m);
+    S[0] = 100.0;
+    S[1] = 70.0;
+    S[2] = 106.0;
+    double expected = std::max(geomMean(S) - K, 0.0);
+    EXPECT_NEAR(Call.Payoff(S), expected, 1.0e-8)
+        << "Terminal payoff: " << Call.Payoff(S) << std::endl;
+
+    S[1] = 180.0;
+    expected = std::max(geomMean(S) - K, 0.0);
+    EXPECT_NEAR(Call.Payoff(S), expected, 1.0e-8)
+        << "Terminal payoff: " << Call.Payoff(S) << std::endl;
+}
+
+TEST(L4, geomAsianPutPayOffs) {
+    double K = 100.0;
+    int m = 3;
+    lecture4::GeomAsian Put = lecture4::GeomAsian(2.3, m, K, false);
+
+    lecture4::SamplePath S(m);
+    S[0] = 100.0;
+    S[1] = 70.0;
+    S[2] = 106.0;
+    double expected = std::max(K - geomMean(S), 0.0);
+    EXPECT_NEAR(Put.Payoff(S), expected, 1.0e-7)
+        << "Terminal payoff: " << Put.Payoff(S) << std::endl;
+
+    S[1] = 180.0;
+    expected = std::max(K - geomMean(S), 0.0);
+    EXPECT_NEAR(Put.Payoff(S), expected, 1.0e-7)
         << "Terminal payoff: " << Put.Payoff(S) << std::endl;
 }
