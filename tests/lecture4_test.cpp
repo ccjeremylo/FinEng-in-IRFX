@@ -162,6 +162,63 @@ TEST(L4, doubleKOPutPayOffs) {
 }
 
 // add test for KI
+TEST(L4, doubleKICallPayOffs) {
+    double K = 100.0;
+    int m = 3;
+    double Bup = 120.0;
+    double Bdown = 80.0;
+    lecture4::DoubleBarrierKI Call =
+        lecture4::DoubleBarrierKI(2.3, m, K, Bup, Bdown, true);
+
+    lecture4::SamplePath S(m);
+    S[0] = 100.0;
+    S[1] = 70.0;
+    S[2] = 106.0;
+    EXPECT_NEAR(Call.Payoff(S), 6.0, 1.0e-8)
+        << "Terminal payoff (KI ITM): " << Call.Payoff(S) << std::endl;
+    S[1] = 110.0;
+    EXPECT_NEAR(Call.Payoff(S), 0.0, 1.0e-8)
+        << "Terminal payoff: " << Call.Payoff(S) << std::endl;
+    S[1] = 130.0;
+    EXPECT_NEAR(Call.Payoff(S), 6.0, 1.0e-8)
+        << "Terminal payoff (KI): " << Call.Payoff(S) << std::endl;
+    S[1] = 120.0;
+    S[2] = K + 12.73;
+    EXPECT_NEAR(Call.Payoff(S), 12.73, 1.0e-8)
+        << "Terminal payoff (KI ITM): " << Call.Payoff(S) << std::endl;
+    S[2] = K;
+    EXPECT_NEAR(Call.Payoff(S), 0.0, 1.0e-8)
+        << "Terminal payoff (KI ATM): " << Call.Payoff(S) << std::endl;
+}
+
+TEST(L4, doubleKIPutPayOffs) {
+    double K = 100.0;
+    int m = 3;
+    double Bup = 120.0;
+    double Bdown = 80.0;
+    lecture4::DoubleBarrierKI Put =
+        lecture4::DoubleBarrierKI(2.3, m, K, Bup, Bdown, false);
+
+    lecture4::SamplePath S(m);
+    S[0] = 100.0;
+    S[1] = 79.99;
+    S[2] = 96.0;
+    EXPECT_NEAR(Put.Payoff(S), 4.0, 1.0e-8)
+        << "Terminal payoff: (KI ITM)" << Put.Payoff(S) << std::endl;
+    S[1] = 110.0;
+    EXPECT_NEAR(Put.Payoff(S), 0.0, 1.0e-8)
+        << "Terminal payoff: " << Put.Payoff(S) << std::endl;
+    S[1] = 120.0;
+    EXPECT_NEAR(Put.Payoff(S), 4.0, 1.0e-8)
+        << "Terminal payoff: (KI ITM)" << Put.Payoff(S) << std::endl;
+    S[1] = 80.0;
+    S[2] = K;
+    EXPECT_NEAR(Put.Payoff(S), 0.0, 1.0e-8)
+        << "Terminal payoff (KI ATM): " << Put.Payoff(S) << std::endl;
+    S[2] = 126.0;
+    EXPECT_NEAR(Put.Payoff(S), 0.0, 1.0e-8)
+        << "Terminal payoff (KI OTM): " << Put.Payoff(S) << std::endl;
+}
 
 // add test for arith asian
 
