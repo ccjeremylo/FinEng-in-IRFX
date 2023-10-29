@@ -24,16 +24,14 @@ The current format/set-up is largely based on [this repo](https://github.com/KYL
 ## Features
 
 - Python binding of c++ code via [```pybind11```](https://github.com/pybind/pybind11) (see this [readme file](https://github.com/ccjeremylo/FinEng-in-IRFX/blob/main/src/pybind_example/README.md) for more info)
-
 - Unit test suite supported by [```googletest```](https://github.com/google/googletest)
 - CI via [Github Actions](https://github.com/features/actions)
 - Code review of jupyter notebooks via [ReviewNB App](https://github.com/apps/review-notebook-app)
-- Auto formatting (tbd)
+- Auto formatting via ```clang-format```
 
 ## Requirements
 
 - CMake
-
 - C++11 compliant compiler
 - Python3.7 or above
 - Gtest
@@ -85,7 +83,6 @@ Now, you can also launch a jupyter lab session with the required virtual env:
 ## Project Structure
 
 - The C++ code can be found [here](https://github.com/ccjeremylo/FinEng-in-IRFX/tree/main/src)
-
 - The Python code can be found [here](https://github.com/ccjeremylo/FinEng-in-IRFX/tree/main/src/python)
 - Example tests can be found [here](https://github.com/ccjeremylo/FinEng-in-IRFX/tree/main/tests)
 - Project to-do list are [here](https://github.com/ccjeremylo/FinEng-in-IRFX/issues)
