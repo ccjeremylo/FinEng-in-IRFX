@@ -19,9 +19,9 @@ protected:
     int counter_;
 };
 
-class BoxMueller : public RNG {
+class BoxMuller : public RNG {
 public:
-    BoxMueller(int seed);
+    BoxMuller(int seed);
     double Gauss();
 };
 
