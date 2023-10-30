@@ -127,8 +127,4 @@ Now, you can also launch a jupyter lab session with the required virtual env:
   - pricing arithmetic asian with geometric asian as [control variate](https://en.wikipedia.org/wiki/Control_variates)
   - pricing barrier with vanilla option as control variate
   - error analysis continued
-<<<<<<< HEAD
-=======
-  - pricing early excerise payoffs (American/Bermudans)
->>>>>>> origin/main
   - [risks computation & error analysis](https://people.maths.ox.ac.uk/gilesm/mc/module_2/module_2_2.pdf)
