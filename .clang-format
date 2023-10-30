@@ -1,0 +1,40 @@
+---
+BasedOnStyle: Google
+
+# indentation:
+IndentWidth: 4
+AccessModifierOffset: -4
+IndentWrappedFunctionNames: 'true'
+IndentCaseLabels: 'true'
+NamespaceIndentation: Inner
+
+# includes:
+SortIncludes: 'true'
+IncludeBlocks: Regroup
+
+# Must be 75 characters or less!
+ColumnLimit: 75
+
+# use \n instead of \r\n
+UseCRLF: false 
+
+# spaces, not tabs!
+UseTab: Never
+
+# if (x) doStuff()  is not allowed, bad style
+AllowShortIfStatementsOnASingleLine: false
+
+# change the next line to All for Alistair's textbook style
+# AlwaysBreakAfterReturnType: TopLevelDefinitions
+AlwaysBreakAfterReturnType: None
+
+# others
+DerivePointerAlignment: 'true'
+FixNamespaceComments: 'true'
+SortUsingDeclarations: 'true'
+PointerAlignment: Left
+ReferenceAlignment: Left
+SpaceAfterLogicalNot: 'true'
+SpaceAfterTemplateKeyword: 'true'
+Standard: Auto
+
