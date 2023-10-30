@@ -159,8 +159,7 @@ class BinomialTree:
         self._check_tree()
 
     def S_T(self, i, n):
-        assert 0 <= i <= n, f"Index i={
-            i} is out of bound. i must be within 0 and {n}"
+        assert 0 <= i <= n, f"Index i={i} is out of bound. i must be within 0 and {n}"
         return fe.L1_S(self._S0, self._U, self._D, n, i)
 
     def prob(self, i):

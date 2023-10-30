@@ -19,10 +19,10 @@ double lecture4::PathDepOption::PriceByMC(lecture4::BSModel& Model,
 }
 
 // Arithmetic Asian
-lecture4::ArthAsian::ArthAsian(double T, int m, double K, bool isCall)
+lecture4::ArithAsian::ArithAsian(double T, int m, double K, bool isCall)
     : PathDepOption(T, m, isCall), K_(K){};
 
-double lecture4::ArthAsian::Payoff(lecture4::SamplePath& S) {
+double lecture4::ArithAsian::Payoff(lecture4::SamplePath& S) {
     double ave = 0.0;
     for (int k = 0; k < m_; k++) {
         ave += S[k];

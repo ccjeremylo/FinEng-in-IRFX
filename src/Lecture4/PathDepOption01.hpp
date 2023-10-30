@@ -22,9 +22,9 @@ protected:
 };
 
 // Asian
-class ArthAsian : public PathDepOption {
+class ArithAsian : public PathDepOption {
 public:
-    ArthAsian(double T, int m, double K, bool isCall);
+    ArithAsian(double T, int m, double K, bool isCall);
     double Payoff(lecture4::SamplePath& S);
 
 protected:

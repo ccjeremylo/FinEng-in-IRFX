@@ -6,8 +6,8 @@ lecture4::BSModel::BSModel(double S0, double r, double sigma,
 
 // length of S should ideally be deduced automatically
 // int m = sizeof(S) / sizeof(double);
-void lecture4::BSModel::GenerateSamplePath(double T, int m,
-                                           SamplePath& S) {
+lecture4::SamplePath lecture4::BSModel::GenerateSamplePath(double T, int m,
+                                                           SamplePath& S) {
     double dt = T / (m - 1);
     double drift = (r_ - 0.5 * sigma_ * sigma_) * dt;
     double terminal_vol = sigma_ * sqrt(dt);
@@ -16,6 +16,7 @@ void lecture4::BSModel::GenerateSamplePath(double T, int m,
         double diff = terminal_vol * generator_.Gauss();
         S[k] = S[k - 1] * exp(drift + diff);
     }
+    return S;  // just so we can use it in Python...
 }
 
 double lecture4::BSModel::GetR() { return r_; };

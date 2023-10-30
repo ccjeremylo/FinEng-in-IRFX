@@ -1,7 +1,12 @@
 #include <pybind11/pybind11.h>
+#include <pybind11/stl.h>
 
 #include "Lecture1/BinModel01.hpp"
 #include "Lecture2/BinModel02.hpp"
+#include "Lecture3/Options07.hpp"
+#include "Lecture4/BSModel01.hpp"
+#include "Lecture4/PathDepOption01.hpp"
+#include "Lecture4/RNGenerator.hpp"
 #include "pybind_example/mymath.hpp"
 
 #define STRINGIFY(x) #x
@@ -16,18 +21,6 @@ PYBIND11_MODULE(fineng_irfx, m) {
         Pybind11 plugin
         -----------------------
         .. currentmodule:: fineng_irfx
-
-        .. autosummary::
-           :toctree: _generatec
-        
-           times
-           adding
-           subtracting
-
-           L1_riskNeutralProb
-           L1_NewtonSymb
-
-           L2_BinModel
     )pbdoc";
 
     // -----------------
@@ -76,6 +69,65 @@ PYBIND11_MODULE(fineng_irfx, m) {
         .def("RiskNeutralProb", &lecture2::BinModel::RiskNeutralProb)
         .def("S", &lecture2::BinModel::S)
         .def_property_readonly("GetR", &lecture2::BinModel::GetR);
+
+    // -----------------
+    // Lecture 3
+
+    py::class_<lecture3::Call>(m, "L3_Call")
+        .def(py::init<double, int>())
+        .def("Payoff", &lecture3::Call::Payoff)
+        .def("PriceByCRR", &lecture3::Call::PriceByCRR)
+        .def("PriceBySnell", &lecture3::Call::PriceBySnell);
+
+    py::class_<lecture3::Put>(m, "L3_Put")
+        .def(py::init<double, int>())
+        .def("Payoff", &lecture3::Put::Payoff)
+        .def("PriceByCRR", &lecture3::Put::PriceByCRR)
+        .def("PriceBySnell", &lecture3::Put::PriceBySnell);
+
+    // -----------------
+    // Lecture 4
+
+    py::class_<rng::BoxMuller>(m, "L4_BoxMuller")
+        .def(py::init<int>())
+        .def("Gauss", &rng::BoxMuller::Gauss)
+        .def_property_readonly("GetSeed", &rng::BoxMuller::GetSeed);
+
+    py::class_<lecture4::SamplePath>(m, "L4_SamplePath")
+        .def(py::init<int>());
+
+    py::class_<lecture4::BSModel>(m, "L4_BSModel")
+        .def(py::init<double, double, double, rng::BoxMuller&>())  // fix?
+        .def("GenerateSamplePath", &lecture4::BSModel::GenerateSamplePath)
+        .def_property_readonly("GetR", &lecture4::BSModel::GetR)
+        .def_property_readonly("GetS0", &lecture4::BSModel::GetS0)
+        .def_property_readonly("GetSigma", &lecture4::BSModel::GetSigma);
+
+    py::class_<lecture4::ArithAsian>(m, "L4_ArithAsian")
+        .def(py::init<double, int, double, bool>())
+        .def("PriceByMC", &lecture4::ArithAsian::PriceByMC)
+        .def("Payoff", &lecture4::ArithAsian::Payoff);
+
+    py::class_<lecture4::GeomAsian>(m, "L4_GeomAsian")
+        .def(py::init<double, int, double, bool>())
+        .def("PriceByMC", &lecture4::GeomAsian::PriceByMC)
+        .def("Payoff", &lecture4::GeomAsian::Payoff);
+
+    py::class_<lecture4::Vanilla>(m, "L4_Vanilla")
+        .def(py::init<double, int, double, bool>())
+        .def("PriceByMC", &lecture4::Vanilla::PriceByMC)
+        .def("PriceByFormula", &lecture4::Vanilla::PriceByFormula)
+        .def("Payoff", &lecture4::Vanilla::Payoff);
+
+    py::class_<lecture4::DoubleBarrierKO>(m, "L4_DoubleBarrierKO")
+        .def(py::init<double, int, double, double, double, bool>())
+        .def("PriceByMC", &lecture4::DoubleBarrierKO::PriceByMC)
+        .def("Payoff", &lecture4::DoubleBarrierKO::Payoff);
+
+    py::class_<lecture4::DoubleBarrierKI>(m, "L4_DoubleBarrierKI")
+        .def(py::init<double, int, double, double, double, bool>())
+        .def("PriceByMC", &lecture4::DoubleBarrierKI::PriceByMC)
+        .def("Payoff", &lecture4::DoubleBarrierKI::Payoff);
 
     // -----------------
     // Set package version number
