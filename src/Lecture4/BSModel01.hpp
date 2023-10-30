@@ -16,7 +16,8 @@ typedef std::vector<double> SamplePath;
 class BSModel {
 public:
     BSModel(double S0, double r, double sigma, rng::RNG& generator);
-    SamplePath GenerateSamplePath(double T, int m, SamplePath& S);
+    lecture4::SamplePath GenerateSamplePath(double T, int m,
+                                            SamplePath& S);
 
     double GetR();
     double GetS0();
