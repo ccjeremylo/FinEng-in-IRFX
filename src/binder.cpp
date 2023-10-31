@@ -107,33 +107,55 @@ PYBIND11_MODULE(fineng_irfx, m) {
         .def(py::init<double, int, double, bool>())
         .def("PriceByMC", &lecture4::ArithAsian::PriceByMC)
         .def("PriceByCVMC", &lecture4::ArithAsian::PriceByControlVariateMC)
-        .def("Payoff", &lecture4::ArithAsian::Payoff);
+        .def("Payoff", &lecture4::ArithAsian::Payoff)
+        .def_property_readonly("GetPrice", &lecture4::ArithAsian::GetPrice)
+        .def_property_readonly("GetPricingError",
+                               &lecture4::ArithAsian::GetPricingError);
 
     py::class_<lecture4::GeomAsian>(m, "L4_GeomAsian")
         .def(py::init<double, int, double, bool>())
         .def("PriceByMC", &lecture4::GeomAsian::PriceByMC)
         .def("PriceByCVMC", &lecture4::GeomAsian::PriceByControlVariateMC)
-        .def("Payoff", &lecture4::GeomAsian::Payoff);
+        .def("Payoff", &lecture4::GeomAsian::Payoff)
+        .def_property_readonly("GetPrice", &lecture4::GeomAsian::GetPrice)
+        .def_property_readonly("GetPricingError",
+                               &lecture4::GeomAsian::GetPricingError);
 
     py::class_<lecture4::Vanilla>(m, "L4_Vanilla")
         .def(py::init<double, int, double, bool>())
         .def("PriceByMC", &lecture4::Vanilla::PriceByMC)
         .def("PriceByFormula", &lecture4::Vanilla::PriceByFormula)
-        .def("Payoff", &lecture4::Vanilla::Payoff);
+        .def("Payoff", &lecture4::Vanilla::Payoff)
+        .def_property_readonly("GetPrice", &lecture4::Vanilla::GetPrice)
+        .def_property_readonly("GetPricingError",
+                               &lecture4::Vanilla::GetPricingError);
 
     py::class_<lecture4::DoubleBarrierKO>(m, "L4_DoubleBarrierKO")
         .def(py::init<double, int, double, double, double, bool>())
         .def("PriceByMC", &lecture4::DoubleBarrierKO::PriceByMC)
         .def("PriceByCVMC",
              &lecture4::DoubleBarrierKO::PriceByControlVariateMC)
-        .def("Payoff", &lecture4::DoubleBarrierKO::Payoff);
+        .def("Payoff", &lecture4::DoubleBarrierKO::Payoff)
+        .def_property_readonly("GetPrice",
+                               &lecture4::DoubleBarrierKO::GetPrice)
+        .def_property_readonly(
+            "GetPricingError",
+            &lecture4::DoubleBarrierKO::GetPricingError);
 
     py::class_<lecture4::DoubleBarrierKI>(m, "L4_DoubleBarrierKI")
         .def(py::init<double, int, double, double, double, bool>())
         .def("PriceByMC", &lecture4::DoubleBarrierKI::PriceByMC)
         .def("PriceByCVMC",
              &lecture4::DoubleBarrierKI::PriceByControlVariateMC)
-        .def("Payoff", &lecture4::DoubleBarrierKI::Payoff);
+        .def("Payoff", &lecture4::DoubleBarrierKI::Payoff)
+        .def_property_readonly("GetPrice",
+                               &lecture4::DoubleBarrierKI::GetPrice)
+        .def_property_readonly(
+            "GetPricingError",
+            &lecture4::DoubleBarrierKI::GetPricingError);
+
+    // -----------------
+    // Lecture 5
 
     // -----------------
     // Set package version number

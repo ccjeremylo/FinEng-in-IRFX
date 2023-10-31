@@ -19,6 +19,7 @@ public:
     };
     virtual double Payoff(lecture4::SamplePath& S) { return -100; };
     double GetPricingError() { return PricingError_; };
+    double GetPrice() { return Price_; };
 
 protected:
     bool isCall_;
