@@ -2,6 +2,7 @@
 
 #include "../src/Lecture2/BlackScholes.hpp"
 #include "../src/Lecture4/BSModel01.hpp"
+#include "../src/Lecture4/ControlVariate.hpp"
 #include "../src/Lecture4/PathDepOption01.hpp"
 #include "../src/Lecture4/RNGenerator.hpp"
 
@@ -292,6 +293,30 @@ TEST(L4, geomAsianPutPayOffs) {
     expected = std::max(K - geomMean(S), 0.0);
     EXPECT_NEAR(Put.Payoff(S), expected, 1.0e-7)
         << "Terminal payoff: " << Put.Payoff(S) << std::endl;
+}
+
+TEST(L4, differenceOfOptionsPayOffs) {
+    double K = 50.0;
+    int m = 3;
+    double T = 5.0;
+    lecture4::ArithAsian AsianCall(T, m, K, true);
+    lecture4::Vanilla Call(T, m, K, true);
+
+    lecture4::ArithAsian* AsianCallPtr = &AsianCall;
+    lecture4::Vanilla* CallPtr = &Call;
+
+    lecture4::DifferenceOfOptions VarRedOpt(T, m, AsianCallPtr, CallPtr);
+
+    lecture4::SamplePath S(m);
+    S[0] = 100.0;
+    S[1] = 105.0;
+    S[2] = 110.0;
+
+    EXPECT_NEAR(AsianCallPtr->Payoff(S), 105.0 - K, 1.0e-7);
+    EXPECT_NEAR(CallPtr->Payoff(S), 110.0 - K, 1.0e-7);
+    double expected = AsianCallPtr->Payoff(S) - CallPtr->Payoff(S);
+    EXPECT_NEAR(VarRedOpt.Payoff(S), expected, 1.0e-7)
+        << "Terminal payoff: " << VarRedOpt.Payoff(S) << std::endl;
 }
 
 // ===============================

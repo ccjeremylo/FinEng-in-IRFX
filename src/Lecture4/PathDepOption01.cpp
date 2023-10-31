@@ -1,6 +1,7 @@
 #include "PathDepOption01.hpp"
 
 #include "../Lecture2/BlackScholes.hpp"
+#include "ControlVariate.hpp"
 
 // Base class - m should be property of Model
 lecture4::PathDepOption::PathDepOption(double T, int m, bool isCall)
@@ -16,6 +17,15 @@ double lecture4::PathDepOption::PriceByMC(lecture4::BSModel& Model,
         H += Payoff(S);
     }
     return exp(-Model.GetR() * T_) * H / N;
+}
+
+double lecture4::PathDepOption::PriceByControlVariateMC(
+    lecture4::BSModel& Model, long N, lecture4::PathDepOption& CVOption) {
+    DifferenceOfOptions VarRedOpt(T_, m_, this, &CVOption);
+
+    double Price =
+        VarRedOpt.PriceByMC(Model, N) + CVOption.PriceByFormula(Model);
+    return Price;
 }
 
 // Arithmetic Asian
