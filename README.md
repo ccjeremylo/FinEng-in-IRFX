@@ -128,3 +128,14 @@ Now, you can also launch a jupyter lab session with the required virtual env:
   - pricing barrier with vanilla option as control variate
   - error analysis continued
   - [risks computation & error analysis](https://people.maths.ox.ac.uk/gilesm/mc/module_2/module_2_2.pdf)
+ 
+### Lecture 5
+
+- Monte Carlo methods continued:
+  - American Options - [Longstaff-Schwartz method](https://people.maths.ox.ac.uk/gilesm/mc/module_6/american.pdf)
+  - Pricing basket options
+ 
+- Short rate modelling:
+  - Introduction to short rate models - 1 factor models
+  - [Merton Model](http://www.dl.edi-info.ir/Option%20pricing%20under%20the%20Merton%20model%20of%20the%20short%20rate.pdf) - bond pricing
+  - Merton Model - implied yield curve
