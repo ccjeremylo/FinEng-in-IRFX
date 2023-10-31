@@ -106,11 +106,13 @@ PYBIND11_MODULE(fineng_irfx, m) {
     py::class_<lecture4::ArithAsian>(m, "L4_ArithAsian")
         .def(py::init<double, int, double, bool>())
         .def("PriceByMC", &lecture4::ArithAsian::PriceByMC)
+        .def("PriceByCVMC", &lecture4::ArithAsian::PriceByControlVariateMC)
         .def("Payoff", &lecture4::ArithAsian::Payoff);
 
     py::class_<lecture4::GeomAsian>(m, "L4_GeomAsian")
         .def(py::init<double, int, double, bool>())
         .def("PriceByMC", &lecture4::GeomAsian::PriceByMC)
+        .def("PriceByCVMC", &lecture4::GeomAsian::PriceByControlVariateMC)
         .def("Payoff", &lecture4::GeomAsian::Payoff);
 
     py::class_<lecture4::Vanilla>(m, "L4_Vanilla")
@@ -122,11 +124,15 @@ PYBIND11_MODULE(fineng_irfx, m) {
     py::class_<lecture4::DoubleBarrierKO>(m, "L4_DoubleBarrierKO")
         .def(py::init<double, int, double, double, double, bool>())
         .def("PriceByMC", &lecture4::DoubleBarrierKO::PriceByMC)
+        .def("PriceByCVMC",
+             &lecture4::DoubleBarrierKO::PriceByControlVariateMC)
         .def("Payoff", &lecture4::DoubleBarrierKO::Payoff);
 
     py::class_<lecture4::DoubleBarrierKI>(m, "L4_DoubleBarrierKI")
         .def(py::init<double, int, double, double, double, bool>())
         .def("PriceByMC", &lecture4::DoubleBarrierKI::PriceByMC)
+        .def("PriceByCVMC",
+             &lecture4::DoubleBarrierKI::PriceByControlVariateMC)
         .def("Payoff", &lecture4::DoubleBarrierKI::Payoff);
 
     // -----------------

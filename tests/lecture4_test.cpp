@@ -327,8 +327,8 @@ TEST(L4, VanillaCallPricer) {
     rng::BoxMuller BM = rng::BoxMuller(1);
 
     double S0 = 100.0;
-    double r = 0.0;
-    double sigma = 0.3;  // works for zero vol...RNG issue?
+    double r = 0.03;
+    double sigma = 0.3;
     lecture4::BSModel Model = lecture4::BSModel(S0, r, sigma, BM);
 
     double K = 80.0;
@@ -380,4 +380,37 @@ TEST(L4, VanillaAnalyticalPricer) {
     double PutPrice = Put.PriceByFormula(Model);
     double BSPutPrice = lecture2::put_price(S0, K, r, sigma, T);
     EXPECT_NEAR(PutPrice, BSPutPrice, 1e-7) << "Put";
+}
+
+TEST(L4, ControlVariatePricing) {
+    rng::BoxMuller BM = rng::BoxMuller(1);
+
+    double S0 = 100.0;
+    double r = 0.01;
+    double sigma = 0.15;
+    lecture4::BSModel Model = lecture4::BSModel(S0, r, sigma, BM);
+
+    double K = 80.0;
+    double T = 5.0;
+    int m = 10;
+
+    long N = 1000;
+
+    // Vanilla Call
+    lecture4::Vanilla Call = lecture4::Vanilla(T, m, K, true);
+
+    // Geom Asian Call
+    lecture4::GeomAsian GeomCall = lecture4::GeomAsian(T, m, K, true);
+    double GeomCallPriceCV =
+        GeomCall.PriceByControlVariateMC(Model, N, Call);
+    double GeomCallErrorCV = GeomCall.GetPricingError();
+
+    double GeomCallPrice = GeomCall.PriceByMC(Model, N);
+    double GeomCallError = GeomCall.GetPricingError();
+
+    EXPECT_TRUE(GeomCallErrorCV > 0)
+        << ", CVMC error: " << GeomCallErrorCV << std::endl;
+    EXPECT_TRUE(GeomCallError > 0)
+        << "MC error: " << GeomCallError << std::endl;
+    EXPECT_NEAR(GeomCallPriceCV, GeomCallPrice, 5.0 * GeomCallError);
 }

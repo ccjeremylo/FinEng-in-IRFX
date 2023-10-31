@@ -9,23 +9,28 @@ lecture4::PathDepOption::PathDepOption(double T, int m, bool isCall)
 
 double lecture4::PathDepOption::PriceByMC(lecture4::BSModel& Model,
                                           long N) {
-    double H = 0.0;
+    double H = 0.0, Hsq = 0.0;
     SamplePath S(m_);
 
     for (long i = 0; i < N; i++) {
         Model.GenerateSamplePath(T_, m_, S);
-        H += Payoff(S);
+        H = (i * H + Payoff(S)) / (i + 1.0);
+        Hsq = (i * Hsq + pow(Payoff(S), 2.0)) / (i + 1.0);
     }
-    return exp(-Model.GetR() * T_) * H / N;
+    double DF = exp(-Model.GetR() * T_);
+    Price_ = DF * H;
+    PricingError_ = DF * sqrt(Hsq - H * H) / sqrt(N - 1.0);
+    return Price_;
 }
 
 double lecture4::PathDepOption::PriceByControlVariateMC(
     lecture4::BSModel& Model, long N, lecture4::PathDepOption& CVOption) {
     DifferenceOfOptions VarRedOpt(T_, m_, this, &CVOption);
 
-    double Price =
+    Price_ =
         VarRedOpt.PriceByMC(Model, N) + CVOption.PriceByFormula(Model);
-    return Price;
+    PricingError_ = VarRedOpt.PricingError_;
+    return Price_;
 }
 
 // Arithmetic Asian
