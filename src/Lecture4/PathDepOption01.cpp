@@ -112,6 +112,11 @@ double lecture4::DoubleBarrierKO::Payoff(lecture4::SamplePath& S) {
     }
 }
 
+double lecture4::DoubleBarrierKO::PriceByVanillaCVMC(
+    lecture4::BSModel& Model, long N, Vanilla& CVOption) {
+    return PriceByControlVariateMC(Model, N, CVOption);
+}
+
 // Double KI
 lecture4::DoubleBarrierKI::DoubleBarrierKI(double T, int m, double K,
                                            double Bup, double Bdown,
@@ -134,4 +139,9 @@ double lecture4::DoubleBarrierKI::Payoff(lecture4::SamplePath& S) {
     } else {
         return std::max(K_ - S[m_ - 1], 0.0);
     }
+}
+
+double lecture4::DoubleBarrierKI::PriceByVanillaCVMC(
+    lecture4::BSModel& Model, long N, Vanilla& CVOption) {
+    return PriceByControlVariateMC(Model, N, CVOption);
 }

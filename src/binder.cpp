@@ -135,6 +135,8 @@ PYBIND11_MODULE(fineng_irfx, m) {
         .def("PriceByMC", &lecture4::DoubleBarrierKO::PriceByMC)
         .def("PriceByCVMC",
              &lecture4::DoubleBarrierKO::PriceByControlVariateMC)
+        .def("PriceByVanillaCVMC",
+             &lecture4::DoubleBarrierKO::PriceByVanillaCVMC)
         .def("Payoff", &lecture4::DoubleBarrierKO::Payoff)
         .def_property_readonly("GetPrice",
                                &lecture4::DoubleBarrierKO::GetPrice)
@@ -147,6 +149,8 @@ PYBIND11_MODULE(fineng_irfx, m) {
         .def("PriceByMC", &lecture4::DoubleBarrierKI::PriceByMC)
         .def("PriceByCVMC",
              &lecture4::DoubleBarrierKI::PriceByControlVariateMC)
+        .def("PriceByVanillaCVMC",
+             &lecture4::DoubleBarrierKI::PriceByVanillaCVMC)
         .def("Payoff", &lecture4::DoubleBarrierKI::Payoff)
         .def_property_readonly("GetPrice",
                                &lecture4::DoubleBarrierKI::GetPrice)
