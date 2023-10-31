@@ -18,13 +18,14 @@ public:
         return -100;
     };
     virtual double Payoff(lecture4::SamplePath& S) { return -100; };
+    double GetPricingError() { return PricingError_; };
 
 protected:
     bool isCall_;
     double T_;
     int m_;
-    // double Price_;
-    // double PricingError_;
+    double Price_;
+    double PricingError_;
 };
 
 // Asian
