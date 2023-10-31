@@ -12,13 +12,19 @@ class PathDepOption {
 public:
     PathDepOption(double T, int m, bool isCall);
     double PriceByMC(lecture4::BSModel& Model, long N);
-
-    virtual double Payoff(lecture4::SamplePath& S) = 0;
+    double PriceByControlVariateMC(lecture4::BSModel& Model, long N,
+                                   PathDepOption& CVOption);
+    virtual double PriceByFormula(lecture4::BSModel Model) {
+        return -100;
+    };
+    virtual double Payoff(lecture4::SamplePath& S) { return -100; };
 
 protected:
     bool isCall_;
     double T_;
     int m_;
+    // double Price_;
+    // double PricingError_;
 };
 
 // Asian
