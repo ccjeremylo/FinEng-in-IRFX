@@ -11,13 +11,13 @@ namespace lecture4 {
 class PathDepOption {
 public:
     PathDepOption(double T, int m, bool isCall);
-    double PriceByMC(lecture4::BSModel& Model, long N);
-    double PriceByControlVariateMC(lecture4::BSModel& Model, long N,
-                                   PathDepOption& CVOption);
+    double PriceByMC(lecture4::BSModel &Model, long N);
+    double PriceByControlVariateMC(lecture4::BSModel &Model, long N,
+                                   PathDepOption &CVOption);
     virtual double PriceByFormula(lecture4::BSModel Model) {
         return -100;
     };
-    virtual double Payoff(lecture4::SamplePath& S) { return -100; };
+    virtual double Payoff(lecture4::SamplePath &S) { return -100; };
     double GetPricingError() { return PricingError_; };
     double GetPrice() { return Price_; };
 
@@ -33,7 +33,7 @@ protected:
 class ArithAsian : public PathDepOption {
 public:
     ArithAsian(double T, int m, double K, bool isCall);
-    double Payoff(lecture4::SamplePath& S);
+    double Payoff(lecture4::SamplePath &S);
 
 protected:
     double K_;
@@ -43,7 +43,7 @@ protected:
 class GeomAsian : public PathDepOption {
 public:
     GeomAsian(double T, int m, double K, bool isCall);
-    double Payoff(lecture4::SamplePath& S);
+    double Payoff(lecture4::SamplePath &S);
 
 protected:
     double K_;
@@ -53,7 +53,7 @@ protected:
 class Vanilla : public PathDepOption {
 public:
     Vanilla(double T, int m, double K, bool isCall);
-    double Payoff(lecture4::SamplePath& S);
+    double Payoff(lecture4::SamplePath &S);
     double PriceByFormula(lecture4::BSModel Model);
 
 protected:
@@ -65,7 +65,9 @@ class DoubleBarrierKO : public PathDepOption {
 public:
     DoubleBarrierKO(double T, int m, double K, double Bup, double Bdown,
                     bool isCall);
-    double Payoff(lecture4::SamplePath& S);
+    double PriceByVanillaCVMC(lecture4::BSModel &Model, long N,
+                              Vanilla &CVOption);
+    double Payoff(lecture4::SamplePath &S);
 
 protected:
     double K_;
@@ -77,7 +79,9 @@ class DoubleBarrierKI : public PathDepOption {
 public:
     DoubleBarrierKI(double T, int m, double K, double Bup, double Bdown,
                     bool isCall);
-    double Payoff(lecture4::SamplePath& S);
+    double PriceByVanillaCVMC(lecture4::BSModel &Model, long N,
+                              Vanilla &CVOption);
+    double Payoff(lecture4::SamplePath &S);
 
 protected:
     double K_;
