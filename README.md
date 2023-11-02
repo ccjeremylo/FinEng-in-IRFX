@@ -7,7 +7,7 @@ Following structure of [this course](https://www.city.ac.uk/prospective-students
 Topics Include:
 
 - Binomial tree/pricer
-- American options
+- American & path-dependent options
 - Monte Carlo methods
 - Non linear solvers for implied vol
 - Curve construction
@@ -110,12 +110,12 @@ Now, you can also launch a jupyter lab session with the required virtual env:
   - pricing early excerise payoffs (American/Bermudans)
   - introduction of [C++ templates](https://en.wikipedia.org/wiki/Template_(C%2B%2B))
   - multiple inheritance in C++
-  - numerical stability and convergence speed
+  - numerical stability and convergence analysis
 
 - [Monte Carlo methods](https://people.maths.ox.ac.uk/gilesm/mc/):
   - pricing vanilla options
   - using [Box-muller](https://en.wikipedia.org/wiki/Box%E2%80%93Muller_transform) as RNG
-  - discretisation via [Euler–Maruyama](https://en.wikipedia.org/wiki/Euler%E2%80%93Maruyama_method)
+  - discretisation via the [Euler–Maruyama scheme](https://en.wikipedia.org/wiki/Euler%E2%80%93Maruyama_method)
   - pricing path-dependent payoffs (barrier/Asian)
   - discretisation error in long stepping (terminal correlation)
 
@@ -124,7 +124,7 @@ Now, you can also launch a jupyter lab session with the required virtual env:
 - Monte Carlo methods continued:
   - Monte Carlo error analysis and convergence
   - [variance reduction](https://en.wikipedia.org/wiki/Variance_reduction) techniques
-  - pricing arithmetic asian with geometric asian as [control variate](https://en.wikipedia.org/wiki/Control_variates)
+  - pricing arithmetic Asian with geometric asian as [control variate](https://en.wikipedia.org/wiki/Control_variates)
   - pricing barrier with vanilla option as control variate
   - error analysis continued
   - [risks computation & error analysis](https://people.maths.ox.ac.uk/gilesm/mc/module_2/module_2_2.pdf)
