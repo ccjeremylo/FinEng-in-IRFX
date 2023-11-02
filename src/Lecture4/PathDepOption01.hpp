@@ -44,6 +44,7 @@ class GeomAsian : public PathDepOption {
 public:
     GeomAsian(double T, int m, double K, bool isCall);
     double Payoff(lecture4::SamplePath &S);
+    double PriceByFormula(lecture4::BSModel Model);
 
 protected:
     double K_;

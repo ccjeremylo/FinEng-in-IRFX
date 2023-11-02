@@ -414,3 +414,30 @@ TEST(L4, ControlVariatePricing) {
         << "MC error: " << GeomCallError << std::endl;
     EXPECT_NEAR(GeomCallPriceCV, GeomCallPrice, 5.0 * GeomCallError);
 }
+
+TEST(L4, GeometricAsianCallPricing) {
+    rng::BoxMuller BM = rng::BoxMuller(1);
+
+    double S0 = 1.0;  // best to normalise this
+    double r = 0.03;
+    double sigma = 0.13;
+    lecture4::BSModel Model = lecture4::BSModel(S0, r, sigma, BM);
+
+    double K = 0.98;
+    double T = 5.3;
+    int m = 300;  // if m is too big, MC price = inf!
+
+    long N = 1000;
+
+    // Geom Asian Call
+    lecture4::GeomAsian GeomCall = lecture4::GeomAsian(T, m, K, true);
+    double GeomCallPriceMC = GeomCall.PriceByMC(Model, N);
+    double GeomCallPriceError = GeomCall.GetPricingError();
+
+    double GeomCallPrice = GeomCall.PriceByFormula(Model);
+
+    EXPECT_TRUE(GeomCallPrice > 0);
+    EXPECT_TRUE(GeomCallPriceMC > 0);
+    EXPECT_TRUE(GeomCallPriceError > 0);
+    EXPECT_NEAR(GeomCallPriceMC, GeomCallPrice, 5.0 * GeomCallPriceError);
+}

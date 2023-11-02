@@ -65,6 +65,19 @@ double lecture4::GeomAsian::Payoff(lecture4::SamplePath& S) {
     return std::max(K_ - ave, 0.0);
 }
 
+// Assumes BS Model
+double lecture4::GeomAsian::PriceByFormula(lecture4::BSModel Model) {
+    double sig = Model.GetSigma();
+    double c1 =
+        Model.GetS0() * exp(-0.5 * (Model.GetR() + sig * sig / 6.0) * T_);
+    double c2 = sig / sqrt(3.0);
+    if (isCall_) {
+        return lecture2::call_price(c1, K_, Model.GetR(), c2, T_);
+    } else {
+        return lecture2::put_price(c1, K_, Model.GetR(), c2, T_);
+    }
+}
+
 // Vanilla
 lecture4::Vanilla::Vanilla(double T, int m, double K, bool isCall)
     : PathDepOption(T, m, isCall), K_(K){};
