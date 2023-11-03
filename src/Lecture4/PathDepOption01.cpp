@@ -154,6 +154,8 @@ double lecture4::DoubleBarrierKI::Payoff(lecture4::SamplePath& S) {
     }
 }
 
+// hack for pybind - fix!
+// see: https://pybind11.readthedocs.io/en/latest/classes.html
 double lecture4::DoubleBarrierKI::PriceByVanillaCVMC(
     lecture4::BSModel& Model, long N, Vanilla& CVOption) {
     return PriceByControlVariateMC(Model, N, CVOption);

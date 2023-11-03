@@ -16,7 +16,7 @@ class BinomialTree:
 
         # convenient param
         self._a = np.exp(r * T / N)
-        self._b = np.exp((2 * r + sigma ** 2) * T / N)
+        self._b = np.exp((2 * r + sigma**2) * T / N)
         self._diff = sigma * np.sqrt(T / N)
 
         # set tree param/style
@@ -97,8 +97,7 @@ class BinomialTree:
         u = self._quadratic_solver(1.0, B, 1.0, True)
         self._U = u - 1.0
         self._D = 1.0 / u - 1.0
-        assert abs(u * (self._D + 1.0) -
-                   1.0) < 1e-7, f"{1+self._U} * {1+self._D} != 1"
+        assert abs(u * (self._D + 1.0) - 1.0) < 1e-7, f"{1+self._U} * {1+self._D} != 1"
 
     def _JR(self):
         """
@@ -164,6 +163,5 @@ class BinomialTree:
 
     def prob(self, i):
         return (
-            fe.L1_NewtonSymb(self._N, i) * self._q**i *
-            (1 - self._q) ** (self._N - i)
+            fe.L1_NewtonSymb(self._N, i) * self._q**i * (1 - self._q) ** (self._N - i)
         )

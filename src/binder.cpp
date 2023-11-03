@@ -103,7 +103,10 @@ PYBIND11_MODULE(fineng_irfx, m) {
         .def_property_readonly("GetS0", &lecture4::BSModel::GetS0)
         .def_property_readonly("GetSigma", &lecture4::BSModel::GetSigma);
 
-    py::class_<lecture4::ArithAsian>(m, "L4_ArithAsian")
+    py::class_<lecture4::PathDepOption>(m, "L4_PathDepOption");
+
+    py::class_<lecture4::ArithAsian, lecture4::PathDepOption>(
+        m, "L4_ArithAsian")
         .def(py::init<double, int, double, bool>())
         .def("PriceByMC", &lecture4::ArithAsian::PriceByMC)
         .def("PriceByCVMC", &lecture4::ArithAsian::PriceByControlVariateMC)
@@ -112,16 +115,18 @@ PYBIND11_MODULE(fineng_irfx, m) {
         .def_property_readonly("GetPricingError",
                                &lecture4::ArithAsian::GetPricingError);
 
-    py::class_<lecture4::GeomAsian>(m, "L4_GeomAsian")
+    py::class_<lecture4::GeomAsian, lecture4::PathDepOption>(
+        m, "L4_GeomAsian")
         .def(py::init<double, int, double, bool>())
         .def("PriceByMC", &lecture4::GeomAsian::PriceByMC)
         .def("PriceByCVMC", &lecture4::GeomAsian::PriceByControlVariateMC)
+        .def("PriceByFormula", &lecture4::GeomAsian::PriceByFormula)
         .def("Payoff", &lecture4::GeomAsian::Payoff)
         .def_property_readonly("GetPrice", &lecture4::GeomAsian::GetPrice)
         .def_property_readonly("GetPricingError",
                                &lecture4::GeomAsian::GetPricingError);
 
-    py::class_<lecture4::Vanilla>(m, "L4_Vanilla")
+    py::class_<lecture4::Vanilla, lecture4::PathDepOption>(m, "L4_Vanilla")
         .def(py::init<double, int, double, bool>())
         .def("PriceByMC", &lecture4::Vanilla::PriceByMC)
         .def("PriceByFormula", &lecture4::Vanilla::PriceByFormula)
@@ -130,7 +135,8 @@ PYBIND11_MODULE(fineng_irfx, m) {
         .def_property_readonly("GetPricingError",
                                &lecture4::Vanilla::GetPricingError);
 
-    py::class_<lecture4::DoubleBarrierKO>(m, "L4_DoubleBarrierKO")
+    py::class_<lecture4::DoubleBarrierKO, lecture4::PathDepOption>(
+        m, "L4_DoubleBarrierKO")
         .def(py::init<double, int, double, double, double, bool>())
         .def("PriceByMC", &lecture4::DoubleBarrierKO::PriceByMC)
         .def("PriceByCVMC",
@@ -144,7 +150,8 @@ PYBIND11_MODULE(fineng_irfx, m) {
             "GetPricingError",
             &lecture4::DoubleBarrierKO::GetPricingError);
 
-    py::class_<lecture4::DoubleBarrierKI>(m, "L4_DoubleBarrierKI")
+    py::class_<lecture4::DoubleBarrierKI, lecture4::PathDepOption>(
+        m, "L4_DoubleBarrierKI")
         .def(py::init<double, int, double, double, double, bool>())
         .def("PriceByMC", &lecture4::DoubleBarrierKI::PriceByMC)
         .def("PriceByCVMC",
