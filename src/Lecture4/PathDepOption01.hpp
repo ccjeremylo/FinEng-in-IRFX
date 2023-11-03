@@ -80,6 +80,7 @@ class DoubleBarrierKI : public PathDepOption {
 public:
     DoubleBarrierKI(double T, int m, double K, double Bup, double Bdown,
                     bool isCall);
+    // dont need this hack anymore!
     double PriceByVanillaCVMC(lecture4::BSModel &Model, long N,
                               Vanilla &CVOption);
     double Payoff(lecture4::SamplePath &S);
