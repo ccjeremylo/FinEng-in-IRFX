@@ -12,7 +12,7 @@ public:
 protected:
     double T_;
     int m_;
-    PathDepOption* Ptr1_;
+    PathDepOption* Ptr1_;  // should we use smart ptr?
     PathDepOption* Ptr2_;
 };
 
