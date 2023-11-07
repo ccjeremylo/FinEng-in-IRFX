@@ -168,6 +168,24 @@ PYBIND11_MODULE(fineng_irfx, m) {
     // -----------------
     // Lecture 5
 
+    py::class_<lecture5::SamplePath>(m, "L5_SamplePath")
+        .def(py::init<int>());
+
+    py::class_<lecture5::BSModel>(m, "L5_BSModel")
+        .def(py::init<matrix::Vector, double, matrix::Matrix,
+                      rng::BoxMuller&>())  // fix?
+        .def("GenerateSamplePath", &lecture5::BSModel::GenerateSamplePath)
+        .def_property_readonly("GetR", &lecture5::BSModel::GetR)
+        .def_property_readonly("GetDim", &lecture5::BSModel::GetDim)
+        .def_property_readonly("GetS0", &lecture5::BSModel::GetS0)
+        .def_property_readonly("GetVolMatrix",
+                               &lecture5::BSModel::GetVolMatrix);
+
+    py::class_<lecture5::VanillaBasket, lecture5::PathDepOption>(
+        m, "L4_VanillaBasket")
+        .def(py::init<double, int, double, bool>())
+        .def("PriceByMC", &lecture5::VanillaBasket::PriceByMC);
+
     // -----------------
     // Set package version number
 

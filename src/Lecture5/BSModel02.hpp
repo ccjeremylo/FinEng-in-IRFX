@@ -14,6 +14,10 @@ public:
     BSModel(matrix::Vector S0, double r, matrix::Matrix C,
             rng::RNG& generator);
     void GenerateSamplePath(double T, int m, SamplePath& S);
+    double GetR();
+    int GetDim();
+    matrix::Vector GetS0();
+    matrix::Matrix GetVolMatrix();
 
 protected:
     matrix::Vector S0_, sigma_;

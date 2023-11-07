@@ -39,6 +39,7 @@ lecture4::ArithAsian::ArithAsian(double T, int m, double K, bool isCall)
 
 double lecture4::ArithAsian::Payoff(lecture4::SamplePath& S) {
     double ave = 0.0;
+    // should use running average instead!
     for (int k = 0; k < m_; k++) {
         ave += S[k];
     }
@@ -49,12 +50,14 @@ double lecture4::ArithAsian::Payoff(lecture4::SamplePath& S) {
     return std::max(K_ - ave, 0.0);
 }
 
-// Geometric Asian
+// Geometric Asian - averaging logic is prone to numerical explosion
+// see: https://github.com/ccjeremylo/FinEng-in-IRFX/issues/85
 lecture4::GeomAsian::GeomAsian(double T, int m, double K, bool isCall)
     : PathDepOption(T, m, isCall), K_(K){};
 
 double lecture4::GeomAsian::Payoff(lecture4::SamplePath& S) {
     double ave = 1.0;
+    // should use running average instead!
     for (int k = 0; k < m_; k++) {
         ave *= S[k];
     }
@@ -154,7 +157,7 @@ double lecture4::DoubleBarrierKI::Payoff(lecture4::SamplePath& S) {
     }
 }
 
-// hack for pybind - fix!
+// hack for pybind - no longer need it - fix!
 // see: https://pybind11.readthedocs.io/en/latest/classes.html
 double lecture4::DoubleBarrierKI::PriceByVanillaCVMC(
     lecture4::BSModel& Model, long N, Vanilla& CVOption) {

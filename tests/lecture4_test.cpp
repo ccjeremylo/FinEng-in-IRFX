@@ -320,10 +320,10 @@ TEST(L4, differenceOfOptionsPayOffs) {
 }
 
 // ===============================
-// Testing Pricer
+// Testing Pricers
 // ===============================
 
-TEST(L4, VanillaCallPricer) {
+TEST(L4, VanillaPricer) {
     rng::BoxMuller BM = rng::BoxMuller(1);
 
     double S0 = 100.0;
@@ -415,6 +415,7 @@ TEST(L4, ControlVariatePricing) {
     EXPECT_NEAR(GeomCallPriceCV, GeomCallPrice, 5.0 * GeomCallError);
 }
 
+// add test for put
 TEST(L4, GeometricAsianCallPricing) {
     rng::BoxMuller BM = rng::BoxMuller(1);
 
@@ -425,7 +426,9 @@ TEST(L4, GeometricAsianCallPricing) {
 
     double K = 0.98;
     double T = 5.3;
-    int m = 300;  // if m is too big, MC price = inf!
+    int m = 300;  // if m is too big, MC price = inf! Fix!
+    // see:
+    // https://github.com/ccjeremylo/FinEng-in-IRFX/issues/85
 
     long N = 1000;
 
