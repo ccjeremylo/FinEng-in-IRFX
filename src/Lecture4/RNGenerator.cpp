@@ -11,6 +11,14 @@ int rng::RNG::GetSeed() { return seed_; };
 
 double rng::RNG::Gauss() { return 0; };
 
+matrix::Vector rng::RNG::GaussVector(int d) {
+    matrix::Vector Z(d);
+    for (int j = 0; j < d; j++) {
+        Z[j] = 0.0;
+    }
+    return Z;
+};
+
 void rng::RNG::incrementSeed() {
     seed_ = seed_ + 1;
     counter_++;
@@ -35,4 +43,13 @@ double rng::BoxMuller::Gauss() {
     // Box-Muller transform
     double z0 = sqrt(-2.0 * log(u1)) * cos(2.0 * M_PI * u2);
     return z0;
+}
+
+// added as part of lecture 5 - basket options
+matrix::Vector rng::BoxMuller::GaussVector(int d) {
+    matrix::Vector Z(d);
+    for (int j = 0; j < d; j++) {
+        Z[j] = Gauss();
+    }
+    return Z;
 }
