@@ -31,3 +31,8 @@ void lecture5::BSModel::GenerateSamplePath(double T, int m,
         St = S[k];
     }
 }
+
+double lecture5::BSModel::GetR() { return r_; }
+int lecture5::BSModel::GetDim() { return S0_.size(); }
+matrix::Vector lecture5::BSModel::GetS0() { return S0_; }
+matrix::Matrix lecture5::BSModel::GetVolMatrix() { return C_; }
