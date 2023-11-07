@@ -1,6 +1,9 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 
+#include "../src/Lecture5/BSModel02.hpp"
+#include "../src/Lecture5/Matrix.hpp"
+#include "../src/Lecture5/PathDepBasketOptions.hpp"
 #include "Lecture1/BinModel01.hpp"
 #include "Lecture2/BinModel02.hpp"
 #include "Lecture3/Options07.hpp"
@@ -181,7 +184,7 @@ PYBIND11_MODULE(fineng_irfx, m) {
         .def_property_readonly("GetVolMatrix",
                                &lecture5::BSModel::GetVolMatrix);
 
-    py::class_<lecture5::VanillaBasket, lecture5::PathDepOption>(
+    py::class_<lecture5::VanillaBasket, lecture5::PathDepBasketOption>(
         m, "L4_VanillaBasket")
         .def(py::init<double, int, double, bool>())
         .def("PriceByMC", &lecture5::VanillaBasket::PriceByMC);
