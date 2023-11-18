@@ -1,15 +1,15 @@
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
 
-#include "../src/Lecture5/BSModel02.hpp"
-#include "../src/Lecture5/Matrix.hpp"
-#include "../src/Lecture5/PathDepBasketOptions.hpp"
 #include "Lecture1/BinModel01.hpp"
 #include "Lecture2/BinModel02.hpp"
 #include "Lecture3/Options07.hpp"
 #include "Lecture4/BSModel01.hpp"
 #include "Lecture4/PathDepOption01.hpp"
 #include "Lecture4/RNGenerator.hpp"
+#include "Lecture5/BSModel02.hpp"
+#include "Lecture5/Matrix.hpp"
+#include "Lecture5/PathDepBasketOptions.hpp"
 #include "pybind_example/mymath.hpp"
 
 #define STRINGIFY(x) #x
@@ -184,8 +184,11 @@ PYBIND11_MODULE(fineng_irfx, m) {
         .def_property_readonly("GetVolMatrix",
                                &lecture5::BSModel::GetVolMatrix);
 
+    // how to exposure abstract classes properly? There is a warning!
+    py::class_<lecture5::PathDepBasketOption>(m, "L5_PathDepBasketOption");
+
     py::class_<lecture5::VanillaBasket, lecture5::PathDepBasketOption>(
-        m, "L4_VanillaBasket")
+        m, "L5_VanillaBasket")
         .def(py::init<double, int, double, bool>())
         .def("PriceByMC", &lecture5::VanillaBasket::PriceByMC);
 

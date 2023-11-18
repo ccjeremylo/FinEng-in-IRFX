@@ -16,6 +16,8 @@ public:
     double GetPricingError() { return PricingError_; };
     double GetPrice() { return Price_; };
 
+    virtual ~PathDepBasketOption() = default;  // need a vitual destructor
+
 protected:
     bool isCall_;
     double T_;
