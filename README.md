@@ -136,7 +136,16 @@ Now, you can also launch a jupyter lab session with the required virtual env:
   - multi-asset simulation
   - pricing basket options
  
-- Short rate modelling:
+- 1 factor short rate modelling:
   - introduction to short rate models - 1 factor models
   - [Merton Model](http://www.dl.edi-info.ir/Option%20pricing%20under%20the%20Merton%20model%20of%20the%20short%20rate.pdf) - bond pricing
   - Merton Model - implied yield curve
+ 
+### Lecture 6
+ 
+- 1 factor short rate modelling continued:
+  - [Vasicek Model](https://en.wikipedia.org/wiki/Vasicek_model) - bond pricing
+  - Vasicek Model - implied yield curve
+  - calibration of the Vasicek model to the day-0 yield curve
+  - intro to the [Hull White](https://en.wikipedia.org/wiki/Hull%E2%80%93White_model) model
+  - calibration of the Hull White model to the day-0 yield curve
