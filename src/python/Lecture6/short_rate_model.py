@@ -67,6 +67,7 @@ class Vasicek(ShortRateModel):
         self._r0 = r0
         self._k = speed
         self._theta = long_term_mean
+        self._theta_hat = long_term_mean * speed
         self._vol = vol
         super().__init__(RNG)
 
@@ -86,20 +87,18 @@ class Vasicek(ShortRateModel):
 
     def short_rate(self, t, dim):
         """
-        let f(s,u) = exp[ -k*(u-s) ]
-        r(t) = r(0) + f(0,t)*r(0) + theta * int_0^t f(t,u) du + sigma * int_0^t f(t,u) dW_u
+        r(t) = f(0,t)*r(0) + theta / k * G(0,t|k) + sigma * sqrt{G(0,t|2k)} N(0,1)
         """
-        term0 = 0
         term1 = self._f(0, t) * self._r0
-        term2 = self._theta * self._int_f(0, t)
+        term2 = self._theta_hat * self._int_f(0, t)
         diff = self._vol * np.sqrt(self._int_f2(0, t)) * self._RNG.get_std_normal(dim)
-        return term0 + term1 + term2 + diff
+        return term1 + term2 + diff
 
     def _log_df(self, t, T, dim):
         int_G = integrate.quad(lambda u: self._int_f(u, T), t, T)[0]
         int_G2 = integrate.quad(lambda u: self._int_f(u, T) ** 2, t, T)[0]
         term0 = self.short_rate(t, dim) * self._int_f(t, T)
-        return -term0 - self._theta * int_G + 0.5 * self._vol**2 * int_G2
+        return -term0 - self._theta_hat * int_G + 0.5 * self._vol**2 * int_G2
 
     def df(self, t, T, dim):
         exponent = self._log_df(t, T, dim)
@@ -110,6 +109,6 @@ class Vasicek(ShortRateModel):
         pass
 
     def short_rate_moments(self, t):
-        mean = self._r0 * self._f(0, t) + self._theta * self._int_f(0, t)
+        mean = self._r0 * self._f(0, t) + self._theta_hat * self._int_f(0, t)
         variance = self._vol**2 * self._int_f2(0, t)
         return mean, variance
